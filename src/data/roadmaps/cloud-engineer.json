@@ -1,0 +1,109 @@
+{
+  "id": "cloud-engineer",
+  "title": "Cloud Engineer",
+  "description": "Design, implement, and manage scalable cloud infrastructure and services",
+  "estimatedTime": "6-10 months",
+  "difficulty": "Intermediate",
+  "salary": {
+    "junior": "$75k-$95k",
+    "mid": "$95k-$140k",
+    "senior": "$140k-$190k+"
+  },
+  "phases": [
+    {
+      "id": "foundations",
+      "title": "Cloud Foundations",
+      "duration": "2 months",
+      "nodes": [
+        {
+          "id": "cloud-basics",
+          "title": "Cloud Computing Fundamentals",
+          "description": "Understand cloud models, service types, and core concepts",
+          "type": "core",
+          "resources": [
+            {
+              "title": "Cloud Computing Explained",
+              "type": "course",
+              "url": "#",
+              "affiliate": true
+            }
+          ],
+          "skills": ["IaaS", "PaaS", "SaaS", "Cloud Models"],
+          "estimatedHours": 25
+        },
+        {
+          "id": "aws-fundamentals",
+          "title": "AWS Core Services",
+          "description": "Master EC2, S3, VPC, IAM, and other essential AWS services",
+          "type": "core",
+          "resources": [
+            {
+              "title": "AWS Certified Cloud Practitioner Guide",
+              "type": "book",
+              "url": "#",
+              "affiliate": true
+            }
+          ],
+          "skills": ["EC2", "S3", "VPC", "IAM", "Lambda"],
+          "estimatedHours": 50
+        }
+      ]
+    },
+    {
+      "id": "intermediate",
+      "title": "Cloud Architecture",
+      "duration": "3-4 months",
+      "nodes": [
+        {
+          "id": "architecture-patterns",
+          "title": "Cloud Architecture Patterns",
+          "description": "Design highly available and scalable cloud architectures",
+          "type": "core",
+          "resources": [
+            {
+              "title": "AWS Solutions Architect Course",
+              "type": "course",
+              "url": "#",
+              "affiliate": true
+            }
+          ],
+          "skills": ["High Availability", "Scalability", "Load Balancing", "Auto Scaling"],
+          "estimatedHours": 60
+        },
+        {
+          "id": "networking",
+          "title": "Cloud Networking",
+          "description": "Configure VPCs, subnets, security groups, and hybrid connectivity",
+          "type": "core",
+          "resources": [],
+          "skills": ["VPC", "Subnets", "Security Groups", "VPN"],
+          "estimatedHours": 40
+        }
+      ]
+    },
+    {
+      "id": "advanced",
+      "title": "Advanced Cloud",
+      "duration": "2-3 months",
+      "nodes": [
+        {
+          "id": "multi-cloud",
+          "title": "Multi-Cloud Strategies",
+          "description": "Work across AWS, Azure, and GCP platforms",
+          "type": "optional",
+          "resources": [
+            {
+              "title": "Multi-Cloud Architecture",
+              "type": "book",
+              "url": "#",
+              "affiliate": true
+            }
+          ],
+          "skills": ["AWS", "Azure", "GCP", "Cloud Migration"],
+          "estimatedHours": 50
+        }
+      ]
+    }
+  ],
+  "relatedPaths": ["devops-engineer", "platform-engineer", "sre"]
+}

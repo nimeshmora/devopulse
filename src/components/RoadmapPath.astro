@@ -1,0 +1,225 @@
+---
+import RoadmapNode from './RoadmapNode.astro';
+
+interface Props {
+  roadmapData: any;
+}
+
+const { roadmapData } = Astro.props;
+---
+
+<div class="roadmap-container">
+  <!-- Progress Bar -->
+  <div class="progress-section">
+    <div class="progress-header">
+      <h3>Your Progress</h3>
+      <span class="progress-percentage" id="progressPercentage">0%</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-bar-fill" id="progressBarFill" style="width: 0%"></div>
+    </div>
+    <button class="btn btn-small btn-secondary reset-progress" id="resetProgress">
+      Reset Progress
+    </button>
+  </div>
+
+  <!-- Roadmap Phases -->
+  <div class="roadmap-phases">
+    {roadmapData.phases.map((phase: any) => (
+      <div class="phase-section">
+        <div class="phase-header">
+          <h3 class="phase-title gradient-text">{phase.title}</h3>
+          <span class="phase-duration">{phase.duration}</span>
+        </div>
+
+        <div class="phase-nodes">
+          {phase.nodes.map((node: any) => (
+            <RoadmapNode
+              id={node.id}
+              title={node.title}
+              description={node.description}
+              type={node.type}
+              resources={node.resources || []}
+              skills={node.skills}
+              estimatedHours={node.estimatedHours}
+              roadmapId={roadmapData.id}
+            />
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<script define:vars={{ roadmapId: roadmapData.id }}>
+  // Progress tracking with localStorage
+  const STORAGE_KEY = `devopulse-progress-${roadmapId}`;
+
+  function loadProgress() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    return saved ? JSON.parse(saved) : {};
+  }
+
+  function saveProgress(progress) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+  }
+
+  function updateProgressBar() {
+    const checkboxes = document.querySelectorAll('.progress-checkbox');
+    const checkedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
+    const total = checkboxes.length;
+    const percentage = total > 0 ? Math.round((checkedCount / total) * 100) : 0;
+
+    const progressBar = document.getElementById('progressBarFill');
+    const progressPercentage = document.getElementById('progressPercentage');
+
+    if (progressBar) progressBar.style.width = `${percentage}%`;
+    if (progressPercentage) progressPercentage.textContent = `${percentage}%`;
+  }
+
+  function initializeProgress() {
+    const progress = loadProgress();
+    const checkboxes = document.querySelectorAll('.progress-checkbox');
+
+    checkboxes.forEach((checkbox) => {
+      const nodeKey = checkbox.getAttribute('data-node-key');
+      if (progress[nodeKey]) {
+        checkbox.checked = true;
+        const node = checkbox.closest('.roadmap-node');
+        if (node) node.classList.add('completed');
+      }
+
+      checkbox.addEventListener('change', (e) => {
+        const nodeKey = e.target.getAttribute('data-node-key');
+        const progress = loadProgress();
+
+        if (e.target.checked) {
+          progress[nodeKey] = true;
+          const node = e.target.closest('.roadmap-node');
+          if (node) node.classList.add('completed');
+        } else {
+          delete progress[nodeKey];
+          const node = e.target.closest('.roadmap-node');
+          if (node) node.classList.remove('completed');
+        }
+
+        saveProgress(progress);
+        updateProgressBar();
+      });
+    });
+
+    updateProgressBar();
+  }
+
+  // Reset progress button
+  const resetBtn = document.getElementById('resetProgress');
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      if (confirm('Are you sure you want to reset all progress for this roadmap?')) {
+        localStorage.removeItem(STORAGE_KEY);
+        const checkboxes = document.querySelectorAll('.progress-checkbox');
+        checkboxes.forEach(checkbox => {
+          checkbox.checked = false;
+          const node = checkbox.closest('.roadmap-node');
+          if (node) node.classList.remove('completed');
+        });
+        updateProgressBar();
+      }
+    });
+  }
+
+  // Initialize on load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeProgress);
+  } else {
+    initializeProgress();
+  }
+</script>
+
+<style>
+  .roadmap-container {
+    width: 100%;
+  }
+
+  .progress-section {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-6);
+    margin-bottom: var(--spacing-8);
+  }
+
+  .progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-4);
+  }
+
+  .progress-header h3 {
+    font-size: var(--text-xl);
+    margin: 0;
+  }
+
+  .progress-percentage {
+    font-size: var(--text-2xl);
+    font-weight: 900;
+    background: var(--gradient-card);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .reset-progress {
+    margin-top: var(--spacing-4);
+  }
+
+  .roadmap-phases {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-8);
+  }
+
+  .phase-section {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-6);
+  }
+
+  .phase-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-6);
+    padding-bottom: var(--spacing-4);
+    border-bottom: 2px solid var(--glass-border);
+  }
+
+  .phase-title {
+    font-size: var(--text-2xl);
+    margin: 0;
+  }
+
+  .phase-duration {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    font-weight: 600;
+    background: rgba(59, 130, 246, 0.1);
+    padding: var(--spacing-2) var(--spacing-4);
+    border-radius: var(--radius-full);
+  }
+
+  .phase-nodes {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (max-width: 768px) {
+    .phase-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--spacing-2);
+    }
+  }
+</style>

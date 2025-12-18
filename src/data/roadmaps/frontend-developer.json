@@ -1,0 +1,114 @@
+{
+  "id": "frontend-developer",
+  "title": "Frontend Developer",
+  "description": "Build beautiful, responsive, and performant user interfaces for web applications",
+  "estimatedTime": "4-8 months",
+  "difficulty": "Beginner",
+  "salary": {
+    "junior": "$60k-$75k",
+    "mid": "$75k-$120k",
+    "senior": "$120k-$170k+"
+  },
+  "phases": [
+    {
+      "id": "foundations",
+      "title": "Web Fundamentals",
+      "duration": "2 months",
+      "nodes": [
+        {
+          "id": "html-css",
+          "title": "HTML & CSS Mastery",
+          "description": "Master semantic HTML and modern CSS including Flexbox and Grid",
+          "type": "core",
+          "resources": [
+            {
+              "title": "HTML & CSS: Design and Build Websites",
+              "type": "book",
+              "url": "#",
+              "affiliate": true
+            },
+            {
+              "title": "FreeCodeCamp Responsive Web Design",
+              "type": "course",
+              "url": "https://www.freecodecamp.org/",
+              "affiliate": false
+            }
+          ],
+          "skills": ["HTML5", "CSS3", "Flexbox", "Grid", "Responsive Design"],
+          "estimatedHours": 50
+        },
+        {
+          "id": "javascript-basics",
+          "title": "JavaScript Fundamentals",
+          "description": "Learn modern JavaScript including ES6+ features",
+          "type": "core",
+          "resources": [
+            {
+              "title": "Eloquent JavaScript",
+              "type": "book",
+              "url": "https://eloquentjavascript.net/",
+              "affiliate": false
+            },
+            {
+              "title": "JavaScript: The Complete Guide",
+              "type": "course",
+              "url": "#",
+              "affiliate": true
+            }
+          ],
+          "skills": ["JavaScript", "ES6+", "DOM Manipulation", "Async/Await"],
+          "estimatedHours": 60
+        }
+      ]
+    },
+    {
+      "id": "intermediate",
+      "title": "Modern Frontend",
+      "duration": "3-4 months",
+      "nodes": [
+        {
+          "id": "react",
+          "title": "React.js Framework",
+          "description": "Build interactive UIs with React, hooks, and state management",
+          "type": "core",
+          "resources": [
+            {
+              "title": "React - The Complete Guide",
+              "type": "course",
+              "url": "#",
+              "affiliate": true
+            }
+          ],
+          "skills": ["React", "Hooks", "State Management", "Component Design"],
+          "estimatedHours": 70
+        },
+        {
+          "id": "tooling",
+          "title": "Build Tools & Package Managers",
+          "description": "Work with npm, Webpack, Vite, and other modern tools",
+          "type": "core",
+          "resources": [],
+          "skills": ["npm", "Webpack", "Vite", "Module Bundlers"],
+          "estimatedHours": 30
+        }
+      ]
+    },
+    {
+      "id": "advanced",
+      "title": "Advanced Frontend",
+      "duration": "2 months",
+      "nodes": [
+        {
+          "id": "performance",
+          "title": "Performance Optimization",
+          "description": "Optimize bundle size, lazy loading, and rendering performance",
+          "type": "core",
+          "resources": [],
+          "skills": ["Performance", "Lazy Loading", "Code Splitting", "Web Vitals"],
+          "estimatedHours": 40
+        }
+      ]
+    }
+  ],
+  "relatedPaths": ["backend-developer", "fullstack-developer"]
+}

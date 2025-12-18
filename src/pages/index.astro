@@ -1,16 +1,503 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
 
+const careerPaths = [
+  {
+    id: 'devops-engineer',
+    title: 'DevOps Engineer',
+    description: 'Bridge development and operations with automation and CI/CD practices',
+    difficulty: 'Intermediate',
+    salary: '$90k-$130k',
+    icon: '🔧',
+    gradient: 'var(--gradient-card)'
+  },
+  {
+    id: 'cloud-engineer',
+    title: 'Cloud Engineer',
+    description: 'Design and manage scalable cloud infrastructure and services',
+    difficulty: 'Intermediate',
+    salary: '$95k-$140k',
+    icon: '☁️',
+    gradient: 'var(--gradient-purple)'
+  },
+  {
+    id: 'frontend-developer',
+    title: 'Frontend Developer',
+    description: 'Build beautiful, responsive user interfaces and web experiences',
+    difficulty: 'Beginner',
+    salary: '$75k-$120k',
+    icon: '🎨',
+    gradient: 'var(--gradient-success)'
+  },
+  {
+    id: 'backend-developer',
+    title: 'Backend Developer',
+    description: 'Create robust server-side applications and APIs',
+    difficulty: 'Beginner',
+    salary: '$80k-$125k',
+    icon: '⚙️',
+    gradient: 'var(--gradient-orange)'
+  },
+  {
+    id: 'fullstack-developer',
+    title: 'Full-stack Developer',
+    description: 'Master both frontend and backend development',
+    difficulty: 'Intermediate',
+    salary: '$85k-$135k',
+    icon: '💻',
+    gradient: 'var(--gradient-card)'
+  },
+  {
+    id: 'sre',
+    title: 'Site Reliability Engineer',
+    description: 'Ensure system reliability, scalability, and performance',
+    difficulty: 'Advanced',
+    salary: '$110k-$160k',
+    icon: '🛡️',
+    gradient: 'var(--gradient-purple)'
+  },
+  {
+    id: 'platform-engineer',
+    title: 'Platform Engineer',
+    description: 'Build internal platforms and developer tools',
+    difficulty: 'Advanced',
+    salary: '$105k-$155k',
+    icon: '🏗️',
+    gradient: 'var(--gradient-success)'
+  },
+  {
+    id: 'security-engineer',
+    title: 'Security Engineer',
+    description: 'Protect systems and data from security threats',
+    difficulty: 'Advanced',
+    salary: '$100k-$150k',
+    icon: '🔐',
+    gradient: 'var(--gradient-orange)'
+  }
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Home">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <!-- Animated orbs background -->
+      <div class="orbs-container">
+        <div class="orb orb-blue animate-float" style="width: 400px; height: 400px; top: -100px; left: -100px;"></div>
+        <div class="orb orb-cyan animate-float" style="width: 300px; height: 300px; top: 100px; right: -50px; animation-delay: 2s;"></div>
+        <div class="orb orb-purple animate-float" style="width: 350px; height: 350px; bottom: -100px; right: 200px; animation-delay: 4s;"></div>
+      </div>
+
+      <div class="hero-content">
+        <h1 class="hero-title animate-fade-in">
+          Navigate Your IT Career with <span class="gradient-text">Confidence</span>
+        </h1>
+        <p class="hero-description animate-fade-in" style="animation-delay: 0.2s;">
+          Interactive roadmaps and expert guidance for aspiring tech professionals. Start your journey to becoming a DevOps Engineer, Cloud Architect, Developer, and more.
+        </p>
+        <div class="hero-cta animate-fade-in" style="animation-delay: 0.4s;">
+          <a href="/roadmaps/" class="btn btn-primary btn-large">
+            Explore Career Paths
+          </a>
+          <a href="/about/" class="btn btn-secondary btn-large">
+            Learn More
+          </a>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid animate-fade-in" style="animation-delay: 0.6s;">
+          <div class="stat-card glass-card">
+            <div class="stat-number gradient-text">10+</div>
+            <div class="stat-label">Career Paths</div>
+          </div>
+          <div class="stat-card glass-card">
+            <div class="stat-number gradient-text">100+</div>
+            <div class="stat-label">Curated Resources</div>
+          </div>
+          <div class="stat-card glass-card">
+            <div class="stat-number gradient-text">Free</div>
+            <div class="stat-label">Forever</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Career Paths Grid -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title text-center">
+          Choose Your <span class="gradient-text">Career Path</span>
+        </h2>
+        <p class="section-description text-center">
+          Explore comprehensive roadmaps tailored to different IT roles. Each path includes skills, resources, and clear progression steps.
+        </p>
+      </div>
+
+      <div class="career-grid">
+        {careerPaths.map((path) => (
+          <a href={`/roadmaps/${path.id}/`} class="career-card glass-card">
+            <div class="career-icon" style={`background: ${path.gradient};`}>
+              {path.icon}
+            </div>
+            <h3 class="career-title">{path.title}</h3>
+            <p class="career-description">{path.description}</p>
+            <div class="career-meta">
+              <span class={`badge badge-${path.difficulty === 'Beginner' ? 'success' : path.difficulty === 'Intermediate' ? 'primary' : 'purple'}`}>
+                {path.difficulty}
+              </span>
+              <span class="career-salary">{path.salary}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="section how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title text-center">
+          How <span class="gradient-text">It Works</span>
+        </h2>
+        <p class="section-description text-center">
+          Three simple steps to start your IT career journey
+        </p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card glass-card">
+          <div class="step-number">1</div>
+          <h3 class="step-title">Choose Your Path</h3>
+          <p class="step-description">
+            Select a career path that aligns with your interests and goals. Explore different roles and their requirements.
+          </p>
+        </div>
+
+        <div class="step-card glass-card">
+          <div class="step-number">2</div>
+          <h3 class="step-title">Follow the Roadmap</h3>
+          <p class="step-description">
+            Work through our interactive roadmap with curated resources, tutorials, and hands-on projects.
+          </p>
+        </div>
+
+        <div class="step-card glass-card">
+          <div class="step-number">3</div>
+          <h3 class="step-title">Track Progress</h3>
+          <p class="step-description">
+            Mark completed skills, track your progress, and watch your expertise grow step by step.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content">
+        <h2 class="cta-title">
+          Ready to Start Your <span class="gradient-text">Journey?</span>
+        </h2>
+        <p class="cta-description">
+          Join thousands of aspiring tech professionals building their careers with DevOpulse
+        </p>
+        <a href="/roadmaps/" class="btn btn-primary btn-large">
+          Get Started Now
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Hero Section */
+  .hero {
+    position: relative;
+    padding: var(--spacing-24) 0 var(--spacing-20);
+    overflow: hidden;
+  }
+
+  .orbs-container {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: var(--z-base);
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .hero-title {
+    font-size: var(--text-6xl);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: var(--spacing-6);
+    letter-spacing: -0.02em;
+  }
+
+  .hero-description {
+    font-size: var(--text-xl);
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-8);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: var(--spacing-4);
+    justify-content: center;
+    margin-bottom: var(--spacing-16);
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-6);
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .stat-card {
+    padding: var(--spacing-6);
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: var(--text-4xl);
+    font-weight: 900;
+    margin-bottom: var(--spacing-2);
+  }
+
+  .stat-label {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Section Headers */
+  .section-header {
+    margin-bottom: var(--spacing-12);
+  }
+
+  .section-title {
+    margin-bottom: var(--spacing-4);
+  }
+
+  .section-description {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Career Grid */
+  .career-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--spacing-6);
+  }
+
+  .career-card {
+    padding: var(--spacing-6);
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .career-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-card);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+  }
+
+  .career-card:hover::before {
+    opacity: 1;
+  }
+
+  .career-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: var(--spacing-4);
+  }
+
+  .career-title {
+    font-size: var(--text-xl);
+    margin-bottom: var(--spacing-2);
+    color: var(--color-text);
+  }
+
+  .career-description {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-4);
+    flex-grow: 1;
+  }
+
+  .career-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .career-salary {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-accent-green);
+  }
+
+  /* How It Works */
+  .how-it-works {
+    background: var(--color-bg-secondary);
+    border-top: 1px solid var(--color-bg-tertiary);
+    border-bottom: 1px solid var(--color-bg-tertiary);
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-8);
+  }
+
+  .step-card {
+    padding: var(--spacing-8);
+    text-align: center;
+  }
+
+  .step-number {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--gradient-card);
+    color: white;
+    font-size: var(--text-3xl);
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--spacing-6);
+  }
+
+  .step-title {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--spacing-3);
+    color: var(--color-text);
+  }
+
+  .step-description {
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+  }
+
+  /* CTA Section */
+  .cta-section {
+    background: var(--gradient-card);
+    padding: var(--spacing-20) 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1), transparent);
+  }
+
+  .cta-content {
+    position: relative;
+    z-index: var(--z-base);
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .cta-title {
+    font-size: var(--text-5xl);
+    font-weight: 900;
+    margin-bottom: var(--spacing-4);
+    color: white;
+  }
+
+  .cta-description {
+    font-size: var(--text-xl);
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: var(--spacing-8);
+  }
+
+  .cta-section .btn-primary {
+    background: white;
+    color: var(--color-primary-600);
+  }
+
+  .cta-section .btn-primary:hover {
+    background: rgba(255, 255, 255, 0.95);
+  }
+
+  /* Responsive Styles */
+  @media (max-width: 1024px) {
+    .career-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .steps-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: var(--text-4xl);
+    }
+
+    .hero-description {
+      font-size: var(--text-lg);
+    }
+
+    .hero-cta {
+      flex-direction: column;
+    }
+
+    .stats-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .career-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .cta-title {
+      font-size: var(--text-3xl);
+    }
+
+    .cta-description {
+      font-size: var(--text-lg);
+    }
+  }
+</style>

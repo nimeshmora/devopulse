@@ -1,0 +1,226 @@
+{
+  "id": "devops-engineer",
+  "title": "DevOps Engineer",
+  "description": "Master the art of bridging development and operations with automation, CI/CD, and cloud infrastructure",
+  "estimatedTime": "6-12 months",
+  "difficulty": "Intermediate",
+  "salary": {
+    "junior": "$70k-$90k",
+    "mid": "$90k-$130k",
+    "senior": "$130k-$180k+"
+  },
+  "phases": [
+    {
+      "id": "foundations",
+      "title": "Foundations",
+      "duration": "2-3 months",
+      "nodes": [
+        {
+          "id": "linux-basics",
+          "title": "Linux Fundamentals",
+          "description": "Master command line, shell scripting, and Linux system administration",
+          "type": "core",
+          "resources": [
+            {
+              "title": "The Linux Command Line",
+              "type": "book",
+              "url": "#",
+              "affiliate": true
+            },
+            {
+              "title": "Linux Fundamentals (Free)",
+              "type": "course",
+              "url": "https://www.edx.org/learn/linux",
+              "affiliate": false
+            }
+          ],
+          "skills": ["Bash", "Linux CLI", "Shell Scripting", "File Systems"],
+          "estimatedHours": 40
+        },
+        {
+          "id": "networking",
+          "title": "Networking Basics",
+          "description": "Understand TCP/IP, DNS, HTTP/HTTPS, and network troubleshooting",
+          "type": "core",
+          "resources": [
+            {
+              "title": "Computer Networking: A Top-Down Approach",
+              "type": "book",
+              "url": "#",
+              "affiliate": true
+            }
+          ],
+          "skills": ["TCP/IP", "DNS", "HTTP/HTTPS", "Firewalls"],
+          "estimatedHours": 30
+        },
+        {
+          "id": "git-basics",
+          "title": "Version Control with Git",
+          "description": "Learn Git workflows, branching strategies, and collaboration",
+          "type": "core",
+          "resources": [
+            {
+              "title": "Pro Git (Free)",
+              "type": "book",
+              "url": "https://git-scm.com/book/en/v2",
+              "affiliate": false
+            }
+          ],
+          "skills": ["Git", "GitHub", "GitLab", "Branching"],
+          "estimatedHours": 20
+        }
+      ]
+    },
+    {
+      "id": "intermediate",
+      "title": "Core DevOps Skills",
+      "duration": "3-4 months",
+      "nodes": [
+        {
+          "id": "ci-cd",
+          "title": "CI/CD Pipelines",
+          "description": "Build automated pipelines with Jenkins, GitLab CI, or GitHub Actions",
+          "type": "core",
+          "resources": [
+            {
+              "title": "Continuous Delivery",
+              "type": "book",
+              "url": "#",
+              "affiliate": true
+            },
+            {
+              "title": "GitHub Actions Course",
+              "type": "course",
+              "url": "#",
+              "affiliate": true
+            }
+          ],
+          "skills": ["Jenkins", "GitHub Actions", "GitLab CI", "Pipeline Automation"],
+          "estimatedHours": 50
+        },
+        {
+          "id": "containerization",
+          "title": "Docker & Containerization",
+          "description": "Master container creation, management, and orchestration basics",
+          "type": "core",
+          "resources": [
+            {
+              "title": "Docker Deep Dive",
+              "type": "book",
+              "url": "#",
+              "affiliate": true
+            },
+            {
+              "title": "Docker Mastery Course",
+              "type": "course",
+              "url": "#",
+              "affiliate": true
+            }
+          ],
+          "skills": ["Docker", "Containers", "Dockerfile", "Docker Compose"],
+          "estimatedHours": 45
+        },
+        {
+          "id": "infrastructure-as-code",
+          "title": "Infrastructure as Code",
+          "description": "Automate infrastructure with Terraform or similar tools",
+          "type": "core",
+          "resources": [
+            {
+              "title": "Terraform: Up and Running",
+              "type": "book",
+              "url": "#",
+              "affiliate": true
+            }
+          ],
+          "skills": ["Terraform", "IaC", "Cloud Formation", "Automation"],
+          "estimatedHours": 50
+        },
+        {
+          "id": "cloud-platforms",
+          "title": "Cloud Platforms (AWS/Azure/GCP)",
+          "description": "Learn one major cloud platform in depth",
+          "type": "core",
+          "resources": [
+            {
+              "title": "AWS Certified Solutions Architect Study Guide",
+              "type": "book",
+              "url": "#",
+              "affiliate": true
+            },
+            {
+              "title": "AWS Free Tier",
+              "type": "tool",
+              "url": "https://aws.amazon.com/free/",
+              "affiliate": false
+            }
+          ],
+          "skills": ["AWS", "Azure", "GCP", "Cloud Services"],
+          "estimatedHours": 60
+        }
+      ]
+    },
+    {
+      "id": "advanced",
+      "title": "Advanced Practices",
+      "duration": "2-3 months",
+      "nodes": [
+        {
+          "id": "kubernetes",
+          "title": "Kubernetes Orchestration",
+          "description": "Deploy and manage containerized applications at scale",
+          "type": "core",
+          "resources": [
+            {
+              "title": "Kubernetes in Action",
+              "type": "book",
+              "url": "#",
+              "affiliate": true
+            },
+            {
+              "title": "Kubernetes for Developers",
+              "type": "course",
+              "url": "#",
+              "affiliate": true
+            }
+          ],
+          "skills": ["Kubernetes", "K8s", "Helm", "Container Orchestration"],
+          "estimatedHours": 60
+        },
+        {
+          "id": "monitoring",
+          "title": "Monitoring & Logging",
+          "description": "Implement observability with Prometheus, Grafana, ELK stack",
+          "type": "core",
+          "resources": [
+            {
+              "title": "Prometheus: Up & Running",
+              "type": "book",
+              "url": "#",
+              "affiliate": true
+            }
+          ],
+          "skills": ["Prometheus", "Grafana", "ELK Stack", "Observability"],
+          "estimatedHours": 40
+        },
+        {
+          "id": "security",
+          "title": "DevSecOps Practices",
+          "description": "Integrate security into your DevOps workflows",
+          "type": "optional",
+          "resources": [
+            {
+              "title": "DevSecOps Complete Course",
+              "type": "course",
+              "url": "#",
+              "affiliate": true
+            }
+          ],
+          "skills": ["Security Scanning", "SAST", "DAST", "Compliance"],
+          "estimatedHours": 35
+        }
+      ]
+    }
+  ],
+  "relatedPaths": ["cloud-engineer", "sre", "platform-engineer"]
+}

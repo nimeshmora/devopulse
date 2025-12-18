@@ -1,0 +1,115 @@
+{
+  "id": "backend-developer",
+  "title": "Backend Developer",
+  "description": "Create robust server-side applications, APIs, and database architectures",
+  "estimatedTime": "5-9 months",
+  "difficulty": "Beginner",
+  "salary": {
+    "junior": "$65k-$80k",
+    "mid": "$80k-$125k",
+    "senior": "$125k-$175k+"
+  },
+  "phases": [
+    {
+      "id": "foundations",
+      "title": "Backend Foundations",
+      "duration": "2-3 months",
+      "nodes": [
+        {
+          "id": "programming-basics",
+          "title": "Programming Language (Python/Node.js/Java)",
+          "description": "Master one backend programming language",
+          "type": "core",
+          "resources": [
+            {
+              "title": "Python Crash Course",
+              "type": "book",
+              "url": "#",
+              "affiliate": true
+            },
+            {
+              "title": "Node.js - The Complete Guide",
+              "type": "course",
+              "url": "#",
+              "affiliate": true
+            }
+          ],
+          "skills": ["Python", "Node.js", "OOP", "Data Structures"],
+          "estimatedHours": 60
+        },
+        {
+          "id": "databases",
+          "title": "Database Fundamentals",
+          "description": "Learn SQL and NoSQL databases",
+          "type": "core",
+          "resources": [
+            {
+              "title": "Learning SQL",
+              "type": "book",
+              "url": "#",
+              "affiliate": true
+            }
+          ],
+          "skills": ["SQL", "PostgreSQL", "MongoDB", "Database Design"],
+          "estimatedHours": 50
+        }
+      ]
+    },
+    {
+      "id": "intermediate",
+      "title": "API Development",
+      "duration": "3-4 months",
+      "nodes": [
+        {
+          "id": "rest-apis",
+          "title": "RESTful API Design",
+          "description": "Build scalable REST APIs with best practices",
+          "type": "core",
+          "resources": [
+            {
+              "title": "REST API Design Rulebook",
+              "type": "book",
+              "url": "#",
+              "affiliate": true
+            }
+          ],
+          "skills": ["REST", "API Design", "Express.js", "FastAPI"],
+          "estimatedHours": 55
+        },
+        {
+          "id": "authentication",
+          "title": "Authentication & Authorization",
+          "description": "Implement JWT, OAuth, and security best practices",
+          "type": "core",
+          "resources": [],
+          "skills": ["JWT", "OAuth", "Security", "Authentication"],
+          "estimatedHours": 40
+        }
+      ]
+    },
+    {
+      "id": "advanced",
+      "title": "Advanced Backend",
+      "duration": "2 months",
+      "nodes": [
+        {
+          "id": "microservices",
+          "title": "Microservices Architecture",
+          "description": "Design and build distributed systems",
+          "type": "optional",
+          "resources": [
+            {
+              "title": "Building Microservices",
+              "type": "book",
+              "url": "#",
+              "affiliate": true
+            }
+          ],
+          "skills": ["Microservices", "Message Queues", "Service Mesh", "Distributed Systems"],
+          "estimatedHours": 50
+        }
+      ]
+    }
+  ],
+  "relatedPaths": ["frontend-developer", "fullstack-developer", "devops-engineer"]
+}

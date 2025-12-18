@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const careerPaths = [
+  { id: 'devops-engineer', title: 'DevOps Engineer', description: 'Bridge development and operations with automation and CI/CD', difficulty: 'Intermediate', salary: '$90k-$130k', icon: '🔧' },
+  { id: 'cloud-engineer', title: 'Cloud Engineer', description: 'Design and manage scalable cloud infrastructure', difficulty: 'Intermediate', salary: '$95k-$140k', icon: '☁️' },
+  { id: 'frontend-developer', title: 'Frontend Developer', description: 'Build beautiful, responsive user interfaces', difficulty: 'Beginner', salary: '$75k-$120k', icon: '🎨' },
+  { id: 'backend-developer', title: 'Backend Developer', description: 'Create robust server-side applications and APIs', difficulty: 'Beginner', salary: '$80k-$125k', icon: '⚙️' },
+  { id: 'fullstack-developer', title: 'Full-stack Developer', description: 'Master both frontend and backend development', difficulty: 'Intermediate', salary: '$85k-$135k', icon: '💻', comingSoon: true },
+  { id: 'sre', title: 'Site Reliability Engineer', description: 'Ensure system reliability and performance', difficulty: 'Advanced', salary: '$110k-$160k', icon: '🛡️', comingSoon: true },
+  { id: 'platform-engineer', title: 'Platform Engineer', description: 'Build internal platforms and developer tools', difficulty: 'Advanced', salary: '$105k-$155k', icon: '🏗️', comingSoon: true },
+  { id: 'security-engineer', title: 'Security Engineer', description: 'Protect systems and data from threats', difficulty: 'Advanced', salary: '$100k-$150k', icon: '🔐', comingSoon: true },
+];
+---
+
+<BaseLayout
+  title="Career Roadmaps"
+  description="Explore comprehensive career roadmaps for IT professionals. Interactive guides for DevOps, Cloud, Development, and more."
+  keywords="career roadmaps, it career paths, devops roadmap, developer roadmap, tech career guide"
+>
+  <div class="roadmaps-page">
+    <section class="hero-simple">
+      <div class="container">
+        <h1 class="text-center">
+          Explore All <span class="gradient-text">Career Roadmaps</span>
+        </h1>
+        <p class="hero-description text-center">
+          Choose your path and start building your future in tech. Each roadmap is designed to take you from beginner to professional.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="roadmaps-grid">
+          {careerPaths.map((path) => (
+            <a
+              href={path.comingSoon ? '#' : `/roadmaps/${path.id}/`}
+              class:list={['roadmap-card', 'glass-card', { 'coming-soon': path.comingSoon }]}
+            >
+              {path.comingSoon && <span class="coming-soon-badge">Coming Soon</span>}
+              <div class="roadmap-icon" style="background: var(--gradient-card);">
+                {path.icon}
+              </div>
+              <h2 class="roadmap-title">{path.title}</h2>
+              <p class="roadmap-description">{path.description}</p>
+              <div class="roadmap-meta">
+                <span class={`badge badge-${path.difficulty === 'Beginner' ? 'success' : path.difficulty === 'Intermediate' ? 'primary' : 'purple'}`}>
+                  {path.difficulty}
+                </span>
+                <span class="roadmap-salary">{path.salary}</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .roadmaps-page { min-height: 100vh; }
+  .hero-simple { padding: var(--spacing-20) 0 var(--spacing-12); }
+  .hero-simple h1 { font-size: var(--text-5xl); font-weight: 900; margin-bottom: var(--spacing-4); }
+  .hero-description { font-size: var(--text-xl); color: var(--color-text-muted); max-width: 700px; margin: 0 auto; }
+  .roadmaps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--spacing-6); }
+  .roadmap-card { position: relative; padding: var(--spacing-6); text-decoration: none; display: flex; flex-direction: column; }
+  .roadmap-card.coming-soon { opacity: 0.6; cursor: not-allowed; }
+  .coming-soon-badge { position: absolute; top: var(--spacing-4); right: var(--spacing-4); font-size: var(--text-xs); padding: var(--spacing-2) var(--spacing-3); background: var(--gradient-purple); color: white; border-radius: var(--radius-full); font-weight: 700; text-transform: uppercase; }
+  .roadmap-icon { width: 64px; height: 64px; border-radius: var(--radius-xl); display: flex; align-items: center; justify-content: center; font-size: 2rem; margin-bottom: var(--spacing-4); }
+  .roadmap-title { font-size: var(--text-2xl); margin-bottom: var(--spacing-2); color: var(--color-text); }
+  .roadmap-description { font-size: var(--text-base); color: var(--color-text-muted); margin-bottom: var(--spacing-4); flex-grow: 1; }
+  .roadmap-meta { display: flex; justify-content: space-between; align-items: center; }
+  .roadmap-salary { font-size: var(--text-sm); font-weight: 600; color: var(--color-accent-green); }
+  @media (max-width: 768px) {
+    .hero-simple h1 { font-size: var(--text-3xl); }
+    .hero-description { font-size: var(--text-lg); }
+    .roadmaps-grid { grid-template-columns: 1fr; }
+  }
+</style>

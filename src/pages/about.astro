@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About DevOpulse"
+  description="Learn about DevOpulse's mission to help IT newcomers navigate their career paths with expert guidance and curated resources."
+  keywords="about devopulse, it career guidance, tech mentorship, career roadmaps"
+>
+  <div class="about-page">
+    <section class="hero-simple">
+      <div class="container">
+        <h1 class="text-center">
+          About <span class="gradient-text">DevOpulse</span>
+        </h1>
+        <p class="hero-description text-center">
+          Empowering the next generation of IT professionals with clear roadmaps and expert guidance
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container container-narrow">
+        <div class="content-box glass-card">
+          <h2>Our Mission</h2>
+          <p>
+            The IT industry can be overwhelming for newcomers. With countless technologies, frameworks, and career paths, it's hard to know where to start. DevOpulse was created to solve this problem.
+          </p>
+          <p>
+            We provide clear, actionable roadmaps for different IT career paths. Whether you want to become a DevOps Engineer, Cloud Architect, or Software Developer, our interactive guides show you exactly what to learn and in what order.
+          </p>
+        </div>
+
+        <div class="content-box glass-card">
+          <h2>What We Offer</h2>
+          <ul class="feature-list">
+            <li><strong>Interactive Roadmaps:</strong> Visual, step-by-step guides for 10+ IT career paths</li>
+            <li><strong>Curated Resources:</strong> Hand-picked books, courses, and tools for each skill</li>
+            <li><strong>Progress Tracking:</strong> Track your learning journey and celebrate milestones</li>
+            <li><strong>Realistic Timelines:</strong> Estimated hours and timelines for each learning phase</li>
+            <li><strong>Salary Insights:</strong> Understand earning potential at different career stages</li>
+          </ul>
+        </div>
+
+        <div class="content-box glass-card">
+          <h2>Who We Help</h2>
+          <p>
+            DevOpulse is designed for:
+          </p>
+          <ul class="feature-list">
+            <li>Career switchers entering the IT industry</li>
+            <li>Recent graduates looking for structured learning paths</li>
+            <li>Self-taught developers seeking validation of their learning journey</li>
+            <li>IT professionals transitioning to new specializations</li>
+          </ul>
+        </div>
+
+        <div class="content-box glass-card" id="disclosure">
+          <h2>Affiliate Disclosure</h2>
+          <p>
+            <strong>Transparency is important to us.</strong> DevOpulse participates in affiliate programs including Amazon Associates, Udemy, Pluralsight, and other educational platforms.
+          </p>
+          <p>
+            When you click on certain links and purchase recommended resources, we may earn a commission at no extra cost to you. These commissions help us maintain and improve DevOpulse, create new content, and keep the platform free for everyone.
+          </p>
+          <p>
+            <strong>Our commitment:</strong> We only recommend resources we genuinely believe will help you succeed in your IT career. Our recommendations are based on quality, relevance, and real-world applicability, not commission rates.
+          </p>
+          <p>
+            Products marked with "Recommended" are affiliate links. We also include many free resources to ensure you have budget-friendly options.
+          </p>
+        </div>
+
+        <div class="content-box glass-card">
+          <h2>Get Started</h2>
+          <p>
+            Ready to begin your IT career journey? Explore our roadmaps and start learning today.
+          </p>
+          <div class="cta-buttons">
+            <a href="/roadmaps/" class="btn btn-primary btn-large">Explore Roadmaps</a>
+            <a href="/" class="btn btn-secondary btn-large">Back to Home</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .about-page { min-height: 100vh; }
+  .hero-simple { padding: var(--spacing-20) 0 var(--spacing-12); }
+  .hero-simple h1 { font-size: var(--text-5xl); font-weight: 900; margin-bottom: var(--spacing-4); }
+  .hero-description { font-size: var(--text-xl); color: var(--color-text-muted); max-width: 700px; margin: 0 auto; }
+  .content-box { padding: var(--spacing-8); margin-bottom: var(--spacing-6); }
+  .content-box h2 { font-size: var(--text-3xl); margin-bottom: var(--spacing-4); color: var(--color-text); }
+  .content-box p { font-size: var(--text-lg); color: var(--color-text-muted); margin-bottom: var(--spacing-4); line-height: 1.8; }
+  .content-box p:last-child { margin-bottom: 0; }
+  .content-box strong { color: var(--color-text); font-weight: 700; }
+  .feature-list { list-style: none; padding: 0; margin: 0; }
+  .feature-list li { font-size: var(--text-lg); color: var(--color-text-muted); margin-bottom: var(--spacing-3); padding-left: var(--spacing-6); position: relative; line-height: 1.8; }
+  .feature-list li::before { content: '✓'; position: absolute; left: 0; color: var(--color-accent-green); font-weight: 900; font-size: var(--text-xl); }
+  .cta-buttons { display: flex; gap: var(--spacing-4); margin-top: var(--spacing-6); }
+  @media (max-width: 768px) {
+    .hero-simple h1 { font-size: var(--text-3xl); }
+    .hero-description { font-size: var(--text-lg); }
+    .content-box h2 { font-size: var(--text-2xl); }
+    .content-box p, .feature-list li { font-size: var(--text-base); }
+    .cta-buttons { flex-direction: column; }
+  }
+</style>
