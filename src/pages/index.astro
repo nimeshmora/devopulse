@@ -1,196 +1,220 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { roadmaps } from '../data/roadmaps';
 
-const careerPaths = [
-  {
-    id: 'devops-engineer',
-    title: 'DevOps Engineer',
-    description: 'Bridge development and operations with automation and CI/CD practices',
-    difficulty: 'Intermediate',
-    salary: '$90k-$130k',
-    icon: '🔧',
-    gradient: 'var(--gradient-card)'
-  },
-  {
-    id: 'cloud-engineer',
-    title: 'Cloud Engineer',
-    description: 'Design and manage scalable cloud infrastructure and services',
-    difficulty: 'Intermediate',
-    salary: '$95k-$140k',
-    icon: '☁️',
-    gradient: 'var(--gradient-purple)'
-  },
-  {
-    id: 'frontend-developer',
-    title: 'Frontend Developer',
-    description: 'Build beautiful, responsive user interfaces and web experiences',
-    difficulty: 'Beginner',
-    salary: '$75k-$120k',
-    icon: '🎨',
-    gradient: 'var(--gradient-success)'
-  },
-  {
-    id: 'backend-developer',
-    title: 'Backend Developer',
-    description: 'Create robust server-side applications and APIs',
-    difficulty: 'Beginner',
-    salary: '$80k-$125k',
-    icon: '⚙️',
-    gradient: 'var(--gradient-orange)'
-  },
-  {
-    id: 'fullstack-developer',
-    title: 'Full-stack Developer',
-    description: 'Master both frontend and backend development',
-    difficulty: 'Intermediate',
-    salary: '$85k-$135k',
-    icon: '💻',
-    gradient: 'var(--gradient-card)'
-  },
-  {
-    id: 'sre',
-    title: 'Site Reliability Engineer',
-    description: 'Ensure system reliability, scalability, and performance',
-    difficulty: 'Advanced',
-    salary: '$110k-$160k',
-    icon: '🛡️',
-    gradient: 'var(--gradient-purple)'
-  },
-  {
-    id: 'platform-engineer',
-    title: 'Platform Engineer',
-    description: 'Build internal platforms and developer tools',
-    difficulty: 'Advanced',
-    salary: '$105k-$155k',
-    icon: '🏗️',
-    gradient: 'var(--gradient-success)'
-  },
-  {
-    id: 'security-engineer',
-    title: 'Security Engineer',
-    description: 'Protect systems and data from security threats',
-    difficulty: 'Advanced',
-    salary: '$100k-$150k',
-    icon: '🔐',
-    gradient: 'var(--gradient-orange)'
-  }
-];
+// Only show unlocked roadmaps in featured sections
+const popularRoadmaps = roadmaps.filter(r => !r.locked && r.popular);
+const newRoadmaps = roadmaps.filter(r => !r.locked && r.new);
+const featuredRoadmaps = roadmaps.slice(0, 12);
 ---
 
 <BaseLayout title="Home">
-  <!-- Hero Section -->
+  <!-- Hero Section with Terminal Aesthetic -->
   <section class="hero">
     <div class="container">
-      <!-- Animated orbs background -->
-      <div class="orbs-container">
-        <div class="orb orb-blue animate-float" style="width: 400px; height: 400px; top: -100px; left: -100px;"></div>
-        <div class="orb orb-cyan animate-float" style="width: 300px; height: 300px; top: 100px; right: -50px; animation-delay: 2s;"></div>
-        <div class="orb orb-purple animate-float" style="width: 350px; height: 350px; bottom: -100px; right: 200px; animation-delay: 4s;"></div>
-      </div>
+      <!-- Matrix-style background -->
+      <div class="matrix-bg"></div>
+
+      <!-- Animated grid background -->
+      <div class="grid-overlay"></div>
 
       <div class="hero-content">
-        <h1 class="hero-title animate-fade-in">
-          Navigate Your IT Career with <span class="gradient-text">Confidence</span>
+        <!-- Terminal-style prompt -->
+        <div class="terminal-prompt animate-fade-in">
+          <span class="prompt-symbol">$</span>
+          <span class="command">./start-career</span>
+          <span class="cursor-blink">_</span>
+        </div>
+
+        <h1 class="hero-title animate-fade-in" style="animation-delay: 0.1s;">
+          <span class="code-bracket">&lt;</span>DevOps & Cloud<span class="code-bracket">/&gt;</span>
+          <br/>
+          Career Roadmaps for <span class="gradient-text glow">Every Journey</span>
         </h1>
+
         <p class="hero-description animate-fade-in" style="animation-delay: 0.2s;">
-          Interactive roadmaps and expert guidance for aspiring tech professionals. Start your journey to becoming a DevOps Engineer, Cloud Architect, Developer, and more.
+          <span class="comment-line">// From Intern to Cloud Architect - Specialized DevOps Career Paths</span><br/>
+          <span class="comment-line">// Career Transitions | AWS/Azure/GCP | Kubernetes | Terraform | SRE | Platform Engineering</span>
         </p>
-        <div class="hero-cta animate-fade-in" style="animation-delay: 0.4s;">
+
+        <div class="hero-cta animate-fade-in" style="animation-delay: 0.3s;">
           <a href="/roadmaps/" class="btn btn-primary btn-large">
-            Explore Career Paths
+            <span>Explore All Roadmaps</span>
+            <span class="btn-arrow">→</span>
           </a>
-          <a href="/about/" class="btn btn-secondary btn-large">
-            Learn More
+          <a href="#featured" class="btn btn-secondary btn-large">
+            <span class="code-text">&lt;Start Here/&gt;</span>
           </a>
         </div>
 
-        <!-- Stats Cards -->
-        <div class="stats-grid animate-fade-in" style="animation-delay: 0.6s;">
-          <div class="stat-card glass-card">
-            <div class="stat-number gradient-text">10+</div>
-            <div class="stat-label">Career Paths</div>
-          </div>
-          <div class="stat-card glass-card">
-            <div class="stat-number gradient-text">100+</div>
-            <div class="stat-label">Curated Resources</div>
-          </div>
-          <div class="stat-card glass-card">
-            <div class="stat-number gradient-text">Free</div>
-            <div class="stat-label">Forever</div>
+        <!-- Stats with Code-like styling -->
+        <div class="stats-terminal animate-fade-in" style="animation-delay: 0.4s;">
+          <div class="terminal-window glass-card">
+            <div class="terminal-header">
+              <div class="terminal-buttons">
+                <span class="btn-close"></span>
+                <span class="btn-minimize"></span>
+                <span class="btn-maximize"></span>
+              </div>
+              <span class="terminal-title">stats.json</span>
+            </div>
+            <div class="terminal-body">
+              <code class="json-code">
+                <span class="json-bracket">&#123;</span><br/>
+                &nbsp;&nbsp;<span class="json-key">"roadmaps"</span>: <span class="json-value gradient-text">{roadmaps.length}</span>,<br/>
+                &nbsp;&nbsp;<span class="json-key">"categories"</span>: <span class="json-value gradient-text">12</span>,<br/>
+                &nbsp;&nbsp;<span class="json-key">"cost"</span>: <span class="json-value json-string">"$0"</span>,<br/>
+                &nbsp;&nbsp;<span class="json-key">"updated"</span>: <span class="json-value json-string">"2025"</span><br/>
+                <span class="json-bracket">&#125;</span>
+              </code>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Career Paths Grid -->
-  <section class="section">
+  <!-- Popular Roadmaps - Bento Grid -->
+  <section class="section featured-section" id="featured">
     <div class="container">
       <div class="section-header">
-        <h2 class="section-title text-center">
-          Choose Your <span class="gradient-text">Career Path</span>
+        <div class="section-tag">
+          <span class="tag-icon">⚡</span>
+          <span>MOST POPULAR</span>
+        </div>
+        <h2 class="section-title">
+          Start with the <span class="gradient-text">Hottest Paths</span>
         </h2>
-        <p class="section-description text-center">
-          Explore comprehensive roadmaps tailored to different IT roles. Each path includes skills, resources, and clear progression steps.
+        <p class="section-description">
+          These roadmaps are trending among developers and have the highest career impact
         </p>
       </div>
 
-      <div class="career-grid">
-        {careerPaths.map((path) => (
-          <a href={`/roadmaps/${path.id}/`} class="career-card glass-card">
-            <div class="career-icon" style={`background: ${path.gradient};`}>
-              {path.icon}
+      <!-- Bento Grid Layout -->
+      <div class="bento-grid">
+        {popularRoadmaps.map((roadmap, index) => (
+          <a
+            href={roadmap.locked ? '#' : `/roadmaps/${roadmap.id}/`}
+            class={`bento-card glass-card bento-card-${index % 6} ${roadmap.locked ? 'locked' : ''}`}
+            data-category={roadmap.category}
+            onclick={roadmap.locked ? 'event.preventDefault(); return false;' : ''}
+          >
+            {roadmap.locked && <div class="lock-overlay"><span class="lock-icon">🔒</span></div>}
+            <div class="card-corner-accent"></div>
+            <div class="card-header">
+              <span class="card-icon">{roadmap.icon}</span>
+              <div class="card-badges">
+                {roadmap.comingSoon && <span class="badge-coming-soon">Coming Soon</span>}
+                {roadmap.popular && !roadmap.locked && <span class="badge-popular">🔥</span>}
+                {roadmap.new && !roadmap.locked && <span class="badge-new">✨ NEW</span>}
+              </div>
             </div>
-            <h3 class="career-title">{path.title}</h3>
-            <p class="career-description">{path.description}</p>
-            <div class="career-meta">
-              <span class={`badge badge-${path.difficulty === 'Beginner' ? 'success' : path.difficulty === 'Intermediate' ? 'primary' : 'purple'}`}>
-                {path.difficulty}
+            <h3 class="card-title">{roadmap.title}</h3>
+            <p class="card-description">{roadmap.description}</p>
+            <div class="card-meta">
+              <span class="meta-pill meta-category">{roadmap.category}</span>
+              <span class="meta-pill meta-difficulty difficulty-{roadmap.difficulty.toLowerCase()}">
+                {roadmap.difficulty}
               </span>
-              <span class="career-salary">{path.salary}</span>
+            </div>
+            <div class="card-footer">
+              <span class="card-salary">{roadmap.salary}</span>
+              <span class="card-duration">{roadmap.estimatedMonths}mo</span>
+            </div>
+            <div class="hover-indicator">
+              <span class="code-text">{roadmap.locked ? 'Locked' : 'View Roadmap →'}</span>
             </div>
           </a>
         ))}
       </div>
+
+      <div class="section-cta">
+        <a href="/roadmaps/" class="btn btn-secondary btn-large">
+          View All {roadmaps.length} Roadmaps
+          <span class="btn-count">{roadmaps.length}</span>
+        </a>
+      </div>
     </div>
   </section>
 
-  <!-- How It Works -->
-  <section class="section how-it-works">
+  <!-- New Roadmaps -->
+  {newRoadmaps.length > 0 && (
+    <section class="section new-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">
+            <span class="tag-icon">✨</span>
+            <span>JUST LAUNCHED</span>
+          </div>
+          <h2 class="section-title">
+            Fresh Off the <span class="gradient-text">Pipeline</span>
+          </h2>
+        </div>
+
+        <div class="horizontal-scroll">
+          <div class="scroll-container">
+            {newRoadmaps.map((roadmap) => (
+              <a href={`/roadmaps/${roadmap.id}/`} class="scroll-card glass-card">
+                <span class="new-indicator">NEW</span>
+                <div class="card-icon-large">{roadmap.icon}</div>
+                <h3 class="card-title">{roadmap.title}</h3>
+                <p class="card-description">{roadmap.description}</p>
+                <div class="card-tags">
+                  {roadmap.tags.slice(0, 3).map(tag => (
+                    <span class="tag">{tag}</span>
+                  ))}
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Categories Grid -->
+  <section class="section categories-section">
     <div class="container">
-      <div class="section-header">
-        <h2 class="section-title text-center">
-          How <span class="gradient-text">It Works</span>
+      <div class="section-header text-center">
+        <h2 class="section-title">
+          Browse by <span class="gradient-text">Category</span>
         </h2>
-        <p class="section-description text-center">
-          Three simple steps to start your IT career journey
+        <p class="section-description">
+          Explore curated roadmaps organized by technology domain
         </p>
       </div>
 
-      <div class="steps-grid">
-        <div class="step-card glass-card">
-          <div class="step-number">1</div>
-          <h3 class="step-title">Choose Your Path</h3>
-          <p class="step-description">
-            Select a career path that aligns with your interests and goals. Explore different roles and their requirements.
-          </p>
-        </div>
-
-        <div class="step-card glass-card">
-          <div class="step-number">2</div>
-          <h3 class="step-title">Follow the Roadmap</h3>
-          <p class="step-description">
-            Work through our interactive roadmap with curated resources, tutorials, and hands-on projects.
-          </p>
-        </div>
-
-        <div class="step-card glass-card">
-          <div class="step-number">3</div>
-          <h3 class="step-title">Track Progress</h3>
-          <p class="step-description">
-            Mark completed skills, track your progress, and watch your expertise grow step by step.
-          </p>
-        </div>
+      <div class="categories-grid">
+        <a href="/roadmaps/?category=DevOps+Fundamentals" class="category-card glass-card">
+          <div class="category-icon">🚀</div>
+          <h3 class="category-title">DevOps Fundamentals</h3>
+          <p class="category-count">{roadmaps.filter(r => r.category === 'DevOps Fundamentals').length} roadmaps</p>
+        </a>
+        <a href="/roadmaps/?category=Career+Transitions" class="category-card glass-card">
+          <div class="category-icon">🔄</div>
+          <h3 class="category-title">Career Transitions</h3>
+          <p class="category-count">{roadmaps.filter(r => r.category === 'Career Transitions').length} roadmaps</p>
+        </a>
+        <a href="/roadmaps/?category=Cloud+Platforms" class="category-card glass-card">
+          <div class="category-icon">☁️</div>
+          <h3 class="category-title">Cloud Platforms</h3>
+          <p class="category-count">{roadmaps.filter(r => r.category === 'Cloud Platforms').length} roadmaps</p>
+        </a>
+        <a href="/roadmaps/?category=Tools+%26+Technologies" class="category-card glass-card">
+          <div class="category-icon">🔧</div>
+          <h3 class="category-title">Tools & Tech</h3>
+          <p class="category-count">{roadmaps.filter(r => r.category === 'Tools & Technologies').length} roadmaps</p>
+        </a>
+        <a href="/roadmaps/?category=Advanced+DevOps" class="category-card glass-card">
+          <div class="category-icon">🛡️</div>
+          <h3 class="category-title">Advanced DevOps</h3>
+          <p class="category-count">{roadmaps.filter(r => r.category === 'Advanced DevOps').length} roadmaps</p>
+        </a>
+        <a href="/roadmaps/?category=Specialized+Roles" class="category-card glass-card">
+          <div class="category-icon">👨‍💼</div>
+          <h3 class="category-title">Specialized Roles</h3>
+          <p class="category-count">{roadmaps.filter(r => r.category === 'Specialized Roles').length} roadmaps</p>
+        </a>
       </div>
     </div>
   </section>
@@ -198,59 +222,124 @@ const careerPaths = [
   <!-- CTA Section -->
   <section class="cta-section">
     <div class="container">
-      <div class="cta-content">
-        <h2 class="cta-title">
-          Ready to Start Your <span class="gradient-text">Journey?</span>
-        </h2>
-        <p class="cta-description">
-          Join thousands of aspiring tech professionals building their careers with DevOpulse
-        </p>
-        <a href="/roadmaps/" class="btn btn-primary btn-large">
-          Get Started Now
-        </a>
+      <div class="cta-terminal glass-card">
+        <div class="terminal-header">
+          <div class="terminal-buttons">
+            <span class="btn-close"></span>
+            <span class="btn-minimize"></span>
+            <span class="btn-maximize"></span>
+          </div>
+          <span class="terminal-title">career.sh</span>
+        </div>
+        <div class="cta-content">
+          <pre class="terminal-text"><span class="prompt">~/devopulse$</span> <span class="command">cat message.txt</span>
+
+<span class="output">Ready to transform your career?</span>
+<span class="output gradient-text glow">Start learning with 100+ interactive roadmaps.</span>
+
+<span class="prompt">~/devopulse$</span> <span class="command cursor-blink">_</span></pre>
+          <a href="/roadmaps/" class="btn btn-primary btn-large">
+            <span>Launch Career Dashboard</span>
+            <span class="btn-arrow">→</span>
+          </a>
+        </div>
       </div>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  /* Hero Section */
+  /* ========== HERO SECTION ========== */
   .hero {
     position: relative;
     padding: var(--spacing-24) 0 var(--spacing-20);
     overflow: hidden;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
   }
 
-  .orbs-container {
+  /* Matrix/Grid Background */
+  .matrix-bg {
     position: absolute;
     inset: 0;
-    pointer-events: none;
-    overflow: hidden;
+    background:
+      linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+      linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: gridMove 20s linear infinite;
+  }
+
+  @keyframes gridMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, 50px); }
+  }
+
+  .grid-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1), transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1), transparent 50%);
   }
 
   .hero-content {
     position: relative;
     z-index: var(--z-base);
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
     text-align: center;
   }
 
+  /* Terminal Prompt */
+  .terminal-prompt {
+    font-family: 'Courier New', monospace;
+    font-size: var(--text-sm);
+    color: var(--color-accent-green);
+    margin-bottom: var(--spacing-6);
+    text-align: left;
+    display: inline-block;
+  }
+
+  .prompt-symbol { color: var(--color-accent-cyan); margin-right: var(--spacing-2); }
+  .command { color: var(--color-accent-purple); }
+
+  @keyframes blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+
+  .cursor-blink {
+    animation: blink 1s infinite;
+    color: var(--color-text);
+  }
+
+  /* Hero Title */
   .hero-title {
-    font-size: var(--text-6xl);
+    font-size: clamp(var(--text-4xl), 7vw, var(--text-7xl));
     font-weight: 900;
     line-height: 1.1;
     margin-bottom: var(--spacing-6);
     letter-spacing: -0.02em;
   }
 
+  .code-bracket {
+    color: var(--color-text-subtle);
+    font-weight: 700;
+  }
+
+  .glow {
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+  }
+
+  .comment-line {
+    font-family: 'Courier New', monospace;
+    color: var(--color-text-subtle);
+    font-size: var(--text-base);
+  }
+
   .hero-description {
-    font-size: var(--text-xl);
-    color: var(--color-text-muted);
     margin-bottom: var(--spacing-8);
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
+    line-height: 1.8;
   }
 
   .hero-cta {
@@ -258,40 +347,114 @@ const careerPaths = [
     gap: var(--spacing-4);
     justify-content: center;
     margin-bottom: var(--spacing-16);
+    flex-wrap: wrap;
   }
 
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-6);
-    max-width: 700px;
+  .btn-arrow {
+    display: inline-block;
+    transition: transform var(--transition-base);
+  }
+
+  .btn:hover .btn-arrow {
+    transform: translateX(4px);
+  }
+
+  .code-text {
+    font-family: 'Courier New', monospace;
+    font-size: var(--text-sm);
+  }
+
+  /* Terminal Stats */
+  .stats-terminal {
+    max-width: 600px;
     margin: 0 auto;
   }
 
-  .stat-card {
-    padding: var(--spacing-6);
+  .terminal-window {
+    background: rgba(10, 14, 26, 0.9);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    overflow: hidden;
+  }
+
+  .terminal-header {
+    background: rgba(20, 24, 41, 0.9);
+    padding: var(--spacing-3) var(--spacing-4);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+  }
+
+  .terminal-buttons {
+    display: flex;
+    gap: var(--spacing-2);
+  }
+
+  .terminal-buttons span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: block;
+  }
+
+  .btn-close { background: #ff5f57; }
+  .btn-minimize { background: #ffbd2e; }
+  .btn-maximize { background: #28c840; }
+
+  .terminal-title {
+    font-family: 'Courier New', monospace;
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    flex: 1;
     text-align: center;
   }
 
-  .stat-number {
-    font-size: var(--text-4xl);
-    font-weight: 900;
-    margin-bottom: var(--spacing-2);
-  }
-
-  .stat-label {
+  .terminal-body {
+    padding: var(--spacing-6);
+    font-family: 'Courier New', monospace;
     font-size: var(--text-sm);
-    color: var(--color-text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
   }
 
-  /* Section Headers */
+  .json-code {
+    display: block;
+    line-height: 1.8;
+  }
+
+  .json-key { color: var(--color-accent-cyan); }
+  .json-value { color: var(--color-accent-orange); }
+  .json-string { color: var(--color-accent-green); }
+  .json-bracket { color: var(--color-text-subtle); }
+
+  /* ========== FEATURED SECTION - BENTO GRID ========== */
+  .featured-section {
+    padding: var(--spacing-20) 0;
+  }
+
+  .section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-2) var(--spacing-4);
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: var(--radius-full);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    color: var(--color-primary-500);
+    margin-bottom: var(--spacing-4);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .tag-icon { font-size: 1rem; }
+
   .section-header {
     margin-bottom: var(--spacing-12);
   }
 
   .section-title {
+    font-size: var(--text-5xl);
+    font-weight: 900;
     margin-bottom: var(--spacing-4);
   }
 
@@ -303,201 +466,475 @@ const careerPaths = [
     margin-right: auto;
   }
 
-  /* Career Grid */
-  .career-grid {
+  /* Bento Grid */
+  .bento-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: var(--spacing-6);
+    margin-bottom: var(--spacing-12);
   }
 
-  .career-card {
+  .bento-card {
+    position: relative;
     padding: var(--spacing-6);
-    cursor: pointer;
     text-decoration: none;
     display: flex;
     flex-direction: column;
-    position: relative;
+    min-height: 280px;
     overflow: hidden;
+    transition: all var(--transition-base);
+    border: 1px solid var(--glass-border);
   }
 
-  .career-card::before {
-    content: '';
+  .bento-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--color-primary-500);
+    box-shadow: 0 20px 60px rgba(59, 130, 246, 0.3);
+  }
+
+  /* Varied sizes for bento layout */
+  .bento-card-0, .bento-card-3 {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  @media (min-width: 768px) {
+    .bento-card-1, .bento-card-4 {
+      grid-column: span 2;
+    }
+  }
+
+  .card-corner-accent {
     position: absolute;
     top: 0;
-    left: 0;
     right: 0;
-    height: 4px;
+    width: 100px;
+    height: 100px;
     background: var(--gradient-card);
     opacity: 0;
+    clip-path: polygon(100% 0, 100% 100%, 0 0);
     transition: opacity var(--transition-base);
   }
 
-  .career-card:hover::before {
-    opacity: 1;
+  .bento-card:hover .card-corner-accent {
+    opacity: 0.1;
   }
 
-  .career-icon {
-    width: 64px;
-    height: 64px;
-    border-radius: var(--radius-xl);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    margin-bottom: var(--spacing-4);
-  }
-
-  .career-title {
-    font-size: var(--text-xl);
-    margin-bottom: var(--spacing-2);
-    color: var(--color-text);
-  }
-
-  .career-description {
-    font-size: var(--text-sm);
-    color: var(--color-text-muted);
-    margin-bottom: var(--spacing-4);
-    flex-grow: 1;
-  }
-
-  .career-meta {
+  .card-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-4);
   }
 
-  .career-salary {
-    font-size: var(--text-sm);
-    font-weight: 600;
-    color: var(--color-accent-green);
+  .card-icon {
+    font-size: 3rem;
+    line-height: 1;
   }
 
-  /* How It Works */
-  .how-it-works {
-    background: var(--color-bg-secondary);
-    border-top: 1px solid var(--color-bg-tertiary);
-    border-bottom: 1px solid var(--color-bg-tertiary);
-  }
-
-  .steps-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-8);
-  }
-
-  .step-card {
-    padding: var(--spacing-8);
-    text-align: center;
-  }
-
-  .step-number {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    background: var(--gradient-card);
-    color: white;
-    font-size: var(--text-3xl);
-    font-weight: 900;
+  .card-badges {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto var(--spacing-6);
+    gap: var(--spacing-2);
   }
 
-  .step-title {
+  .badge-popular {
+    font-size: var(--text-lg);
+  }
+
+  .badge-new {
+    font-size: var(--text-xs);
+    padding: var(--spacing-1) var(--spacing-2);
+    background: var(--gradient-purple);
+    border-radius: var(--radius-md);
+    font-weight: 700;
+  }
+
+  .card-title {
     font-size: var(--text-2xl);
+    font-weight: 700;
     margin-bottom: var(--spacing-3);
     color: var(--color-text);
   }
 
-  .step-description {
+  .card-description {
     font-size: var(--text-base);
     color: var(--color-text-muted);
+    margin-bottom: auto;
+    line-height: 1.6;
   }
 
-  /* CTA Section */
+  .card-meta {
+    display: flex;
+    gap: var(--spacing-2);
+    margin-top: var(--spacing-4);
+    flex-wrap: wrap;
+  }
+
+  .meta-pill {
+    padding: var(--spacing-1) var(--spacing-3);
+    border-radius: var(--radius-full);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .meta-category {
+    background: rgba(139, 92, 246, 0.2);
+    color: var(--color-accent-purple);
+    border: 1px solid var(--color-accent-purple);
+  }
+
+  .meta-difficulty {
+    border: 1px solid currentColor;
+  }
+
+  .difficulty-beginner {
+    background: rgba(16, 185, 129, 0.2);
+    color: var(--color-accent-green);
+  }
+
+  .difficulty-intermediate {
+    background: rgba(59, 130, 246, 0.2);
+    color: var(--color-primary-500);
+  }
+
+  .difficulty-advanced {
+    background: rgba(245, 158, 11, 0.2);
+    color: var(--color-accent-orange);
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--spacing-4);
+    padding-top: var(--spacing-4);
+    border-top: 1px solid var(--color-bg-tertiary);
+  }
+
+  .card-salary {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--color-accent-green);
+  }
+
+  .card-duration {
+    font-size: var(--text-xs);
+    color: var(--color-text-subtle);
+    font-family: 'Courier New', monospace;
+  }
+
+  .hover-indicator {
+    position: absolute;
+    bottom: var(--spacing-6);
+    right: var(--spacing-6);
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all var(--transition-base);
+    font-family: 'Courier New', monospace;
+    font-size: var(--text-sm);
+    color: var(--color-primary-500);
+  }
+
+  .bento-card:hover .hover-indicator {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Locked State */
+  .bento-card.locked {
+    cursor: not-allowed;
+    opacity: 0.6;
+    position: relative;
+  }
+
+  .bento-card.locked:hover {
+    transform: none;
+    border-color: var(--glass-border);
+    box-shadow: var(--glass-shadow);
+  }
+
+  .lock-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    background: rgba(6, 182, 212, 0.1);
+    backdrop-filter: blur(4px);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--color-primary-500);
+  }
+
+  .lock-icon {
+    font-size: 2rem;
+    filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.5));
+  }
+
+  .badge-coming-soon {
+    font-size: var(--text-xs);
+    padding: var(--spacing-1) var(--spacing-3);
+    background: var(--gradient-teal);
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+  }
+
+  .section-cta {
+    text-align: center;
+    margin-top: var(--spacing-12);
+  }
+
+  .btn-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+    margin-left: var(--spacing-2);
+    padding: 0 var(--spacing-3);
+    background: rgba(59, 130, 246, 0.2);
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--color-primary-500);
+  }
+
+  /* ========== NEW ROADMAPS SECTION ========== */
+  .new-section {
+    background: var(--color-bg-secondary);
+    border-top: 1px solid var(--color-bg-tertiary);
+    border-bottom: 1px solid var(--color-bg-tertiary);
+    padding: var(--spacing-20) 0;
+  }
+
+  .horizontal-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primary-500) var(--color-bg-tertiary);
+  }
+
+  .horizontal-scroll::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .horizontal-scroll::-webkit-scrollbar-track {
+    background: var(--color-bg-tertiary);
+    border-radius: var(--radius-full);
+  }
+
+  .horizontal-scroll::-webkit-scrollbar-thumb {
+    background: var(--color-primary-500);
+    border-radius: var(--radius-full);
+  }
+
+  .scroll-container {
+    display: flex;
+    gap: var(--spacing-6);
+    padding-bottom: var(--spacing-6);
+  }
+
+  .scroll-card {
+    position: relative;
+    flex: 0 0 320px;
+    padding: var(--spacing-6);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    min-height: 280px;
+  }
+
+  .new-indicator {
+    position: absolute;
+    top: var(--spacing-4);
+    right: var(--spacing-4);
+    padding: var(--spacing-1) var(--spacing-3);
+    background: var(--gradient-success);
+    border-radius: var(--radius-full);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+  }
+
+  .card-icon-large {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-4);
+  }
+
+  .card-tags {
+    display: flex;
+    gap: var(--spacing-2);
+    flex-wrap: wrap;
+    margin-top: auto;
+    padding-top: var(--spacing-4);
+  }
+
+  .tag {
+    padding: var(--spacing-1) var(--spacing-2);
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: var(--radius-md);
+    font-size: var(--text-xs);
+    color: var(--color-primary-500);
+    font-family: 'Courier New', monospace;
+  }
+
+  /* ========== CATEGORIES GRID ========== */
+  .categories-section {
+    padding: var(--spacing-20) 0;
+  }
+
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-6);
+  }
+
+  .category-card {
+    padding: var(--spacing-8);
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all var(--transition-base);
+  }
+
+  .category-card:hover {
+    transform: scale(1.05);
+  }
+
+  .category-icon {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-4);
+    filter: grayscale(0.3);
+    transition: filter var(--transition-base);
+  }
+
+  .category-card:hover .category-icon {
+    filter: grayscale(0);
+  }
+
+  .category-title {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    margin-bottom: var(--spacing-2);
+    color: var(--color-text);
+  }
+
+  .category-count {
+    font-size: var(--text-sm);
+    color: var(--color-text-subtle);
+    font-family: 'Courier New', monospace;
+  }
+
+  /* ========== CTA SECTION ========== */
   .cta-section {
-    background: var(--gradient-card);
     padding: var(--spacing-20) 0;
     position: relative;
     overflow: hidden;
   }
 
-  .cta-section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1), transparent);
+  .cta-terminal {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(10, 14, 26, 0.9);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    overflow: hidden;
   }
 
   .cta-content {
-    position: relative;
-    z-index: var(--z-base);
+    padding: var(--spacing-8);
     text-align: center;
-    max-width: 700px;
-    margin: 0 auto;
   }
 
-  .cta-title {
-    font-size: var(--text-5xl);
-    font-weight: 900;
-    margin-bottom: var(--spacing-4);
-    color: white;
-  }
-
-  .cta-description {
-    font-size: var(--text-xl);
-    color: rgba(255, 255, 255, 0.9);
+  .terminal-text {
+    font-family: 'Courier New', monospace;
+    font-size: var(--text-base);
+    text-align: left;
     margin-bottom: var(--spacing-8);
+    line-height: 1.8;
+    color: var(--color-text-muted);
+    overflow-x: auto;
   }
 
-  .cta-section .btn-primary {
-    background: white;
-    color: var(--color-primary-600);
+  .terminal-text .prompt {
+    color: var(--color-accent-green);
   }
 
-  .cta-section .btn-primary:hover {
-    background: rgba(255, 255, 255, 0.95);
+  .terminal-text .command {
+    color: var(--color-accent-cyan);
   }
 
-  /* Responsive Styles */
+  .terminal-text .output {
+    color: var(--color-text);
+    display: block;
+    margin: var(--spacing-2) 0;
+  }
+
+  /* ========== RESPONSIVE STYLES ========== */
   @media (max-width: 1024px) {
-    .career-grid {
+    .bento-grid {
       grid-template-columns: repeat(2, 1fr);
     }
 
-    .steps-grid {
-      grid-template-columns: 1fr;
+    .bento-card-1, .bento-card-4 {
+      grid-column: span 1;
+    }
+
+    .categories-grid {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
   @media (max-width: 768px) {
-    .hero-title {
-      font-size: var(--text-4xl);
+    .hero {
+      min-height: auto;
+      padding: var(--spacing-16) 0;
     }
 
-    .hero-description {
-      font-size: var(--text-lg);
+    .hero-title {
+      font-size: var(--text-4xl);
     }
 
     .hero-cta {
       flex-direction: column;
     }
 
-    .stats-grid {
+    .bento-grid {
       grid-template-columns: 1fr;
     }
 
-    .career-grid {
-      grid-template-columns: 1fr;
+    .categories-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
 
-    .cta-title {
+    .section-title {
       font-size: var(--text-3xl);
     }
 
-    .cta-description {
-      font-size: var(--text-lg);
+    .scroll-card {
+      flex: 0 0 280px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .categories-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .terminal-text {
+      font-size: var(--text-sm);
     }
   }
 </style>

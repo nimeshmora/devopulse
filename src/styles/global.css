@@ -42,26 +42,26 @@ p, h1, h2, h3, h4, h5, h6 {
 
 /* ========== CSS CUSTOM PROPERTIES ========== */
 :root {
-  /* Background - Deep professional blues */
-  --color-bg: #0a0e1a;
-  --color-bg-secondary: #141829;
-  --color-bg-tertiary: #1e2439;
+  /* Background - Clean dark theme */
+  --color-bg: #0b1120;
+  --color-bg-secondary: #131b2e;
+  --color-bg-tertiary: #1a2332;
 
-  /* Primary - Tech gradient colors */
-  --color-primary-500: #3b82f6;
-  --color-primary-600: #2563eb;
-  --color-primary-700: #1d4ed8;
-  --color-accent-cyan: #06b6d4;
-  --color-accent-purple: #8b5cf6;
+  /* Primary - Modern cyan/teal palette */
+  --color-primary-500: #06b6d4;
+  --color-primary-600: #0891b2;
+  --color-primary-700: #0e7490;
+  --color-accent-cyan: #22d3ee;
+  --color-accent-teal: #14b8a6;
   --color-accent-green: #10b981;
-  --color-accent-orange: #f59e0b;
+  --color-accent-orange: #fb923c;
 
-  /* Gradients */
-  --gradient-hero: linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #8b5cf6 100%);
-  --gradient-card: linear-gradient(135deg, #3b82f6, #06b6d4);
+  /* Gradients - Clean cyan/teal focused */
+  --gradient-hero: linear-gradient(135deg, #06b6d4 0%, #14b8a6 50%, #10b981 100%);
+  --gradient-card: linear-gradient(135deg, #06b6d4, #14b8a6);
   --gradient-success: linear-gradient(135deg, #10b981, #059669);
-  --gradient-purple: linear-gradient(135deg, #8b5cf6, #7c3aed);
-  --gradient-orange: linear-gradient(135deg, #f59e0b, #d97706);
+  --gradient-teal: linear-gradient(135deg, #14b8a6, #0d9488);
+  --gradient-orange: linear-gradient(135deg, #fb923c, #f97316);
 
   /* Text */
   --color-text: #f8fafc;
@@ -70,12 +70,12 @@ p, h1, h2, h3, h4, h5, h6 {
   --color-text-dark: #64748b;
 
   /* Glass morphism */
-  --glass-bg: rgba(20, 24, 41, 0.7);
-  --glass-bg-light: rgba(30, 36, 57, 0.6);
-  --glass-border: rgba(59, 130, 246, 0.2);
-  --glass-border-purple: rgba(139, 92, 246, 0.2);
-  --glass-shadow: 0 8px 32px 0 rgba(59, 130, 246, 0.15);
-  --glass-shadow-hover: 0 12px 48px 0 rgba(59, 130, 246, 0.25);
+  --glass-bg: rgba(19, 27, 46, 0.7);
+  --glass-bg-light: rgba(26, 35, 50, 0.6);
+  --glass-border: rgba(6, 182, 212, 0.2);
+  --glass-border-teal: rgba(20, 184, 166, 0.2);
+  --glass-shadow: 0 8px 32px 0 rgba(6, 182, 212, 0.15);
+  --glass-shadow-hover: 0 12px 48px 0 rgba(6, 182, 212, 0.25);
 
   /* Typography */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -309,10 +309,10 @@ a:hover {
   border: 1px solid var(--color-accent-green);
 }
 
-.badge-purple {
-  background: rgba(139, 92, 246, 0.2);
-  color: var(--color-accent-purple);
-  border: 1px solid var(--color-accent-purple);
+.badge-teal {
+  background: rgba(20, 184, 166, 0.2);
+  color: var(--color-accent-teal);
+  border: 1px solid var(--color-accent-teal);
 }
 
 .badge-orange {
@@ -434,16 +434,16 @@ a:hover {
   pointer-events: none;
 }
 
-.orb-blue {
+.orb-cyan {
   background: var(--color-primary-500);
 }
 
-.orb-cyan {
-  background: var(--color-accent-cyan);
+.orb-teal {
+  background: var(--color-accent-teal);
 }
 
-.orb-purple {
-  background: var(--color-accent-purple);
+.orb-green {
+  background: var(--color-accent-green);
 }
 
 /* ========== PROGRESS BAR ========== */

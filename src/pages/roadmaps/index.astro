@@ -1,80 +1,866 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { roadmaps, getAllCategories, type Roadmap } from '../../data/roadmaps';
 
-const careerPaths = [
-  { id: 'devops-engineer', title: 'DevOps Engineer', description: 'Bridge development and operations with automation and CI/CD', difficulty: 'Intermediate', salary: '$90k-$130k', icon: '🔧' },
-  { id: 'cloud-engineer', title: 'Cloud Engineer', description: 'Design and manage scalable cloud infrastructure', difficulty: 'Intermediate', salary: '$95k-$140k', icon: '☁️' },
-  { id: 'frontend-developer', title: 'Frontend Developer', description: 'Build beautiful, responsive user interfaces', difficulty: 'Beginner', salary: '$75k-$120k', icon: '🎨' },
-  { id: 'backend-developer', title: 'Backend Developer', description: 'Create robust server-side applications and APIs', difficulty: 'Beginner', salary: '$80k-$125k', icon: '⚙️' },
-  { id: 'fullstack-developer', title: 'Full-stack Developer', description: 'Master both frontend and backend development', difficulty: 'Intermediate', salary: '$85k-$135k', icon: '💻', comingSoon: true },
-  { id: 'sre', title: 'Site Reliability Engineer', description: 'Ensure system reliability and performance', difficulty: 'Advanced', salary: '$110k-$160k', icon: '🛡️', comingSoon: true },
-  { id: 'platform-engineer', title: 'Platform Engineer', description: 'Build internal platforms and developer tools', difficulty: 'Advanced', salary: '$105k-$155k', icon: '🏗️', comingSoon: true },
-  { id: 'security-engineer', title: 'Security Engineer', description: 'Protect systems and data from threats', difficulty: 'Advanced', salary: '$100k-$150k', icon: '🔐', comingSoon: true },
-];
+const categories = getAllCategories();
+const totalRoadmaps = roadmaps.length;
 ---
 
 <BaseLayout
-  title="Career Roadmaps"
-  description="Explore comprehensive career roadmaps for IT professionals. Interactive guides for DevOps, Cloud, Development, and more."
-  keywords="career roadmaps, it career paths, devops roadmap, developer roadmap, tech career guide"
+  title="All Career Roadmaps"
+  description="Browse 50+ interactive career roadmaps for developers, DevOps engineers, cloud architects, and more. Search and filter by technology, difficulty, and category."
+  keywords="career roadmaps, tech careers, developer roadmaps, devops roadmap, programming learning paths"
 >
   <div class="roadmaps-page">
-    <section class="hero-simple">
+    <!-- Hero Section -->
+    <section class="hero-section">
       <div class="container">
-        <h1 class="text-center">
-          Explore All <span class="gradient-text">Career Roadmaps</span>
-        </h1>
-        <p class="hero-description text-center">
-          Choose your path and start building your future in tech. Each roadmap is designed to take you from beginner to professional.
-        </p>
+        <div class="hero-content">
+          <div class="terminal-breadcrumb">
+            <span class="prompt">~/devopulse/roadmaps$</span>
+            <span class="cursor-blink">_</span>
+          </div>
+
+          <h1 class="page-title">
+            <span class="code-bracket">&lt;</span>
+            All Roadmaps
+            <span class="code-bracket">/&gt;</span>
+          </h1>
+
+          <p class="page-description">
+            <span class="comment">// {totalRoadmaps} DevOps & Cloud career paths - From beginner to architect</span>
+          </p>
+
+          <!-- Search Bar -->
+          <div class="search-container glass-card">
+            <div class="search-icon">🔍</div>
+            <input
+              type="text"
+              id="searchInput"
+              class="search-input"
+              placeholder="Search roadmaps by title, tags, or technology..."
+              autocomplete="off"
+            />
+            <div class="search-shortcut">
+              <kbd>Ctrl</kbd> + <kbd>K</kbd>
+            </div>
+          </div>
+
+          <!-- Filter Chips -->
+          <div class="filter-section">
+            <div class="filter-group">
+              <span class="filter-label">Category:</span>
+              <div class="filter-chips">
+                <button class="filter-chip active" data-category="all">
+                  All ({totalRoadmaps})
+                </button>
+                {categories.map(category => {
+                  const count = roadmaps.filter(r => r.category === category).length;
+                  const categorySlug = category.replace(/\s+/g, '-');
+                  return (
+                    <button class="filter-chip" data-category={categorySlug}>
+                      {category} ({count})
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <span class="filter-label">Difficulty:</span>
+              <div class="filter-chips">
+                <button class="filter-chip active" data-difficulty="all">All</button>
+                <button class="filter-chip difficulty-beginner" data-difficulty="Beginner">Beginner</button>
+                <button class="filter-chip difficulty-intermediate" data-difficulty="Intermediate">Intermediate</button>
+                <button class="filter-chip difficulty-advanced" data-difficulty="Advanced">Advanced</button>
+              </div>
+            </div>
+
+            <div class="filter-actions">
+              <button id="clearFilters" class="btn btn-secondary btn-small">
+                Clear Filters
+              </button>
+              <div class="results-count">
+                Showing <span id="resultCount">{totalRoadmaps}</span> roadmaps
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="section">
+    <!-- Roadmaps Grid -->
+    <section class="roadmaps-section">
       <div class="container">
-        <div class="roadmaps-grid">
-          {careerPaths.map((path) => (
+        <div id="roadmapsGrid" class="roadmaps-grid">
+          {roadmaps.map((roadmap, index) => {
+            const categorySlug = roadmap.category.replace(/\s+/g, '-');
+            return (
             <a
-              href={path.comingSoon ? '#' : `/roadmaps/${path.id}/`}
-              class:list={['roadmap-card', 'glass-card', { 'coming-soon': path.comingSoon }]}
+              href={roadmap.locked ? '#' : `/roadmaps/${roadmap.id}/`}
+              class={`roadmap-card glass-card ${roadmap.locked ? 'locked' : ''}`}
+              data-category={categorySlug}
+              data-difficulty={roadmap.difficulty}
+              data-tags={roadmap.tags.join(',')}
+              data-title={roadmap.title.toLowerCase()}
+              data-popular={roadmap.popular ? 'true' : 'false'}
+              data-new={roadmap.new ? 'true' : 'false'}
             >
-              {path.comingSoon && <span class="coming-soon-badge">Coming Soon</span>}
-              <div class="roadmap-icon" style="background: var(--gradient-card);">
-                {path.icon}
+              {roadmap.locked && <div class="lock-overlay"><span class="lock-icon">🔒</span></div>}
+
+              <div class="card-number">
+                <span class="number-label">#</span>{String(index + 1).padStart(2, '0')}
               </div>
-              <h2 class="roadmap-title">{path.title}</h2>
-              <p class="roadmap-description">{path.description}</p>
-              <div class="roadmap-meta">
-                <span class={`badge badge-${path.difficulty === 'Beginner' ? 'success' : path.difficulty === 'Intermediate' ? 'primary' : 'purple'}`}>
-                  {path.difficulty}
-                </span>
-                <span class="roadmap-salary">{path.salary}</span>
+
+              <div class="card-header">
+                <div class="card-icon">{roadmap.icon}</div>
+                <div class="card-badges">
+                  {roadmap.comingSoon && <span class="badge-coming-soon">Coming Soon</span>}
+                  {roadmap.popular && !roadmap.locked && <span class="badge-fire">🔥</span>}
+                  {roadmap.new && !roadmap.locked && <span class="badge-new">✨ NEW</span>}
+                </div>
+              </div>
+
+              <h3 class="card-title">{roadmap.title}</h3>
+              <p class="card-description">{roadmap.description}</p>
+
+              <div class="card-tags">
+                {roadmap.tags.slice(0, 4).map(tag => (
+                  <span class="tag">{tag}</span>
+                ))}
+                {roadmap.tags.length > 4 && (
+                  <span class="tag tag-more">+{roadmap.tags.length - 4}</span>
+                )}
+              </div>
+
+              <div class="card-footer">
+                <div class="card-meta">
+                  <span class={`meta-difficulty difficulty-${roadmap.difficulty.toLowerCase()}`}>
+                    {roadmap.difficulty}
+                  </span>
+                  <span class="meta-category">{roadmap.category}</span>
+                </div>
+                <div class="card-stats">
+                  {roadmap.salary && <span class="stat-salary">{roadmap.salary}</span>}
+                  <span class="stat-duration">{roadmap.estimatedMonths}mo</span>
+                </div>
+              </div>
+
+              <div class="card-hover-overlay">
+                <span class="view-roadmap">{roadmap.locked ? 'Locked' : 'View Roadmap →'}</span>
               </div>
             </a>
-          ))}
+            );
+          })}
+        </div>
+
+        <!-- No Results Message -->
+        <div id="noResults" class="no-results" style="display: none;">
+          <div class="terminal-window glass-card">
+            <div class="terminal-header">
+              <div class="terminal-buttons">
+                <span class="btn-close"></span>
+                <span class="btn-minimize"></span>
+                <span class="btn-maximize"></span>
+              </div>
+              <span class="terminal-title">error.log</span>
+            </div>
+            <div class="terminal-body">
+              <pre class="error-text"><span class="prompt">$</span> <span class="command">search --query="<span id="searchQuery"></span>"</span>
+
+<span class="error">Error: No roadmaps found matching your criteria</span>
+
+<span class="suggestion">Suggestions:</span>
+  • Try different keywords
+  • Remove some filters
+  • Browse all roadmaps
+
+<span class="prompt">$</span> <span class="cursor-blink">_</span></pre>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   </div>
+
+  <script>
+    // Search and Filter Functionality
+    const searchInput = document.getElementById('searchInput') as HTMLInputElement;
+    const roadmapsGrid = document.getElementById('roadmapsGrid') as HTMLElement;
+    const noResults = document.getElementById('noResults') as HTMLElement;
+    const resultCount = document.getElementById('resultCount') as HTMLElement;
+    const searchQuery = document.getElementById('searchQuery') as HTMLElement;
+    const clearFiltersBtn = document.getElementById('clearFilters') as HTMLButtonElement;
+    const roadmapCards = document.querySelectorAll('.roadmap-card') as NodeListOf<HTMLElement>;
+
+    let activeCategory = 'all';
+    let activeDifficulty = 'all';
+    let searchTerm = '';
+
+    // Filter function
+    function filterRoadmaps() {
+      let visibleCount = 0;
+      const lowerSearchTerm = searchTerm.toLowerCase();
+
+      roadmapCards.forEach(card => {
+        const category = card.dataset.category || '';
+        const difficulty = card.dataset.difficulty || '';
+        const tags = (card.dataset.tags || '').toLowerCase();
+        const title = (card.dataset.title || '').toLowerCase();
+
+        const categoryMatch = activeCategory === 'all' || category === activeCategory;
+        const difficultyMatch = activeDifficulty === 'all' || difficulty === activeDifficulty;
+        const searchMatch = searchTerm === '' ||
+          title.includes(lowerSearchTerm) ||
+          tags.includes(lowerSearchTerm);
+
+        if (categoryMatch && difficultyMatch && searchMatch) {
+          card.style.display = 'flex';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      // Update UI
+      resultCount.textContent = visibleCount.toString();
+      if (visibleCount === 0) {
+        roadmapsGrid.style.display = 'none';
+        noResults.style.display = 'block';
+        searchQuery.textContent = searchTerm || 'No matches';
+      } else {
+        roadmapsGrid.style.display = 'grid';
+        noResults.style.display = 'none';
+      }
+    }
+
+    // Search input handler
+    searchInput?.addEventListener('input', (e) => {
+      searchTerm = (e.target as HTMLInputElement).value;
+      filterRoadmaps();
+    });
+
+    // Category filter chips - only select filter buttons, not roadmap cards
+    const categoryChips = document.querySelectorAll('.filter-chip[data-category]');
+    categoryChips.forEach(chip => {
+      chip.addEventListener('click', (e) => {
+        e.preventDefault();
+        const category = (chip as HTMLElement).dataset.category || 'all';
+        activeCategory = category;
+
+        // Update active state
+        categoryChips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+
+        filterRoadmaps();
+      });
+    });
+
+    // Difficulty filter chips - only select filter buttons, not roadmap cards
+    const difficultyChips = document.querySelectorAll('.filter-chip[data-difficulty]');
+    difficultyChips.forEach(chip => {
+      chip.addEventListener('click', (e) => {
+        e.preventDefault();
+        const difficulty = (chip as HTMLElement).dataset.difficulty || 'all';
+        activeDifficulty = difficulty;
+
+        // Update active state
+        difficultyChips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+
+        filterRoadmaps();
+      });
+    });
+
+    // Clear filters
+    clearFiltersBtn?.addEventListener('click', () => {
+      activeCategory = 'all';
+      activeDifficulty = 'all';
+      searchTerm = '';
+      searchInput.value = '';
+
+      // Reset all chips
+      categoryChips.forEach((c, i) => {
+        c.classList.toggle('active', i === 0);
+      });
+      difficultyChips.forEach((c, i) => {
+        c.classList.toggle('active', i === 0);
+      });
+
+      filterRoadmaps();
+    });
+
+    // Keyboard shortcut (Ctrl+K)
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        searchInput?.focus();
+      }
+    });
+
+    // Parse URL parameters on load
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlCategory = urlParams.get('category');
+    if (urlCategory) {
+      activeCategory = urlCategory;
+      categoryChips.forEach(chip => {
+        const category = (chip as HTMLElement).dataset.category;
+        chip.classList.toggle('active', category === urlCategory);
+      });
+      filterRoadmaps();
+    }
+
+    // Prevent roadmap cards from triggering filter events when clicked
+    roadmapCards.forEach(card => {
+      card.addEventListener('click', (e) => {
+        // Only prevent navigation if the card is locked
+        if (card.classList.contains('locked')) {
+          e.preventDefault();
+          return false;
+        }
+        // Allow normal navigation for unlocked cards
+      });
+    });
+  </script>
 </BaseLayout>
 
 <style>
-  .roadmaps-page { min-height: 100vh; }
-  .hero-simple { padding: var(--spacing-20) 0 var(--spacing-12); }
-  .hero-simple h1 { font-size: var(--text-5xl); font-weight: 900; margin-bottom: var(--spacing-4); }
-  .hero-description { font-size: var(--text-xl); color: var(--color-text-muted); max-width: 700px; margin: 0 auto; }
-  .roadmaps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--spacing-6); }
-  .roadmap-card { position: relative; padding: var(--spacing-6); text-decoration: none; display: flex; flex-direction: column; }
-  .roadmap-card.coming-soon { opacity: 0.6; cursor: not-allowed; }
-  .coming-soon-badge { position: absolute; top: var(--spacing-4); right: var(--spacing-4); font-size: var(--text-xs); padding: var(--spacing-2) var(--spacing-3); background: var(--gradient-purple); color: white; border-radius: var(--radius-full); font-weight: 700; text-transform: uppercase; }
-  .roadmap-icon { width: 64px; height: 64px; border-radius: var(--radius-xl); display: flex; align-items: center; justify-content: center; font-size: 2rem; margin-bottom: var(--spacing-4); }
-  .roadmap-title { font-size: var(--text-2xl); margin-bottom: var(--spacing-2); color: var(--color-text); }
-  .roadmap-description { font-size: var(--text-base); color: var(--color-text-muted); margin-bottom: var(--spacing-4); flex-grow: 1; }
-  .roadmap-meta { display: flex; justify-content: space-between; align-items: center; }
-  .roadmap-salary { font-size: var(--text-sm); font-weight: 600; color: var(--color-accent-green); }
+  .roadmaps-page {
+    min-height: 100vh;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    padding: var(--spacing-20) 0 var(--spacing-12);
+    background:
+      linear-gradient(180deg, rgba(59, 130, 246, 0.05) 0%, transparent 100%),
+      linear-gradient(90deg, rgba(59, 130, 246, 0.02) 1px, transparent 1px),
+      linear-gradient(rgba(59, 130, 246, 0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 50px 50px, 50px 50px;
+  }
+
+  .hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .terminal-breadcrumb {
+    font-family: 'Courier New', monospace;
+    font-size: var(--text-sm);
+    color: var(--color-accent-green);
+    margin-bottom: var(--spacing-4);
+  }
+
+  .prompt {
+    color: var(--color-accent-cyan);
+  }
+
+  .page-title {
+    font-size: var(--text-6xl);
+    font-weight: 900;
+    margin-bottom: var(--spacing-4);
+  }
+
+  .page-description {
+    font-family: 'Courier New', monospace;
+    color: var(--color-text-subtle);
+    margin-bottom: var(--spacing-12);
+  }
+
+  .comment {
+    color: var(--color-text-subtle);
+  }
+
+  /* Search Container */
+  .search-container {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-4) var(--spacing-6);
+    margin-bottom: var(--spacing-12);
+    background: rgba(10, 14, 26, 0.6);
+    border: 2px solid var(--glass-border);
+    transition: border-color var(--transition-base);
+  }
+
+  .search-container:focus-within {
+    border-color: var(--color-primary-500);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+  }
+
+  .search-icon {
+    font-size: 1.5rem;
+    opacity: 0.6;
+  }
+
+  .search-input {
+    flex: 1;
+    background: none;
+    border: none;
+    color: var(--color-text);
+    font-size: var(--text-lg);
+    outline: none;
+    font-family: 'Courier New', monospace;
+  }
+
+  .search-input::placeholder {
+    color: var(--color-text-subtle);
+  }
+
+  .search-shortcut {
+    display: flex;
+    gap: var(--spacing-1);
+    font-size: var(--text-xs);
+    color: var(--color-text-subtle);
+  }
+
+  .search-shortcut kbd {
+    padding: var(--spacing-1) var(--spacing-2);
+    background: var(--color-bg-tertiary);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    font-family: 'Courier New', monospace;
+    font-size: var(--text-xs);
+  }
+
+  /* Filter Section */
+  .filter-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-6);
+    align-items: center;
+  }
+
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+    width: 100%;
+  }
+
+  .filter-label {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-family: 'Courier New', monospace;
+  }
+
+  .filter-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-2);
+    justify-content: center;
+  }
+
+  .filter-chip {
+    padding: var(--spacing-2) var(--spacing-4);
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-bg-tertiary);
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    font-family: 'Courier New', monospace;
+  }
+
+  .filter-chip:hover {
+    border-color: var(--color-primary-500);
+    color: var(--color-text);
+  }
+
+  .filter-chip.active {
+    background: var(--gradient-card);
+    border-color: var(--color-primary-500);
+    color: white;
+  }
+
+  .filter-chip.difficulty-beginner.active {
+    background: var(--gradient-success);
+  }
+
+  .filter-chip.difficulty-intermediate.active {
+    background: var(--gradient-card);
+  }
+
+  .filter-chip.difficulty-advanced.active {
+    background: var(--gradient-orange);
+  }
+
+  .filter-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-6);
+    width: 100%;
+    justify-content: center;
+    margin-top: var(--spacing-4);
+  }
+
+  .results-count {
+    font-size: var(--text-sm);
+    color: var(--color-text-subtle);
+    font-family: 'Courier New', monospace;
+  }
+
+  .results-count span {
+    font-weight: 700;
+    color: var(--color-primary-500);
+  }
+
+  /* Roadmaps Grid */
+  .roadmaps-section {
+    padding: var(--spacing-12) 0 var(--spacing-20);
+  }
+
+  .roadmaps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: var(--spacing-6);
+  }
+
+  .roadmap-card {
+    position: relative;
+    padding: var(--spacing-6);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    min-height: 320px;
+    border: 1px solid var(--glass-border);
+    transition: all var(--transition-base);
+    overflow: hidden;
+  }
+
+  .roadmap-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: var(--color-primary-500);
+    box-shadow: 0 20px 60px rgba(59, 130, 246, 0.3);
+  }
+
+  .card-number {
+    position: absolute;
+    top: var(--spacing-4);
+    left: var(--spacing-4);
+    font-family: 'Courier New', monospace;
+    font-size: var(--text-xs);
+    color: var(--color-text-subtle);
+    opacity: 0.5;
+  }
+
+  .number-label {
+    color: var(--color-accent-cyan);
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-4);
+  }
+
+  .card-icon {
+    font-size: 3.5rem;
+    line-height: 1;
+  }
+
+  .card-badges {
+    display: flex;
+    gap: var(--spacing-2);
+    align-items: center;
+  }
+
+  .badge-fire {
+    font-size: 1.5rem;
+  }
+
+  .badge-new {
+    padding: var(--spacing-1) var(--spacing-2);
+    background: var(--gradient-purple);
+    border-radius: var(--radius-md);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    color: white;
+  }
+
+  .card-title {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    margin-bottom: var(--spacing-3);
+    color: var(--color-text);
+  }
+
+  .card-description {
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-4);
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-2);
+    margin-bottom: auto;
+    margin-top: var(--spacing-4);
+  }
+
+  .tag {
+    padding: var(--spacing-1) var(--spacing-2);
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: var(--radius-md);
+    font-size: var(--text-xs);
+    color: var(--color-primary-500);
+    font-family: 'Courier New', monospace;
+  }
+
+  .tag-more {
+    background: rgba(139, 92, 246, 0.1);
+    border-color: rgba(139, 92, 246, 0.3);
+    color: var(--color-accent-purple);
+  }
+
+  .card-footer {
+    margin-top: var(--spacing-6);
+    padding-top: var(--spacing-4);
+    border-top: 1px solid var(--color-bg-tertiary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card-meta {
+    display: flex;
+    gap: var(--spacing-2);
+    flex-wrap: wrap;
+  }
+
+  .meta-difficulty {
+    padding: var(--spacing-1) var(--spacing-2);
+    border-radius: var(--radius-md);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    border: 1px solid;
+  }
+
+  .difficulty-beginner {
+    background: rgba(16, 185, 129, 0.2);
+    color: var(--color-accent-green);
+    border-color: var(--color-accent-green);
+  }
+
+  .difficulty-intermediate {
+    background: rgba(59, 130, 246, 0.2);
+    color: var(--color-primary-500);
+    border-color: var(--color-primary-500);
+  }
+
+  .difficulty-advanced {
+    background: rgba(245, 158, 11, 0.2);
+    color: var(--color-accent-orange);
+    border-color: var(--color-accent-orange);
+  }
+
+  .meta-category {
+    padding: var(--spacing-1) var(--spacing-2);
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: var(--radius-md);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--color-accent-purple);
+  }
+
+  .card-stats {
+    display: flex;
+    gap: var(--spacing-3);
+    align-items: center;
+    font-family: 'Courier New', monospace;
+  }
+
+  .stat-salary {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--color-accent-green);
+  }
+
+  .stat-duration {
+    font-size: var(--text-xs);
+    color: var(--color-text-subtle);
+  }
+
+  .card-hover-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--spacing-4);
+    background: var(--gradient-card);
+    transform: translateY(100%);
+    transition: transform var(--transition-base);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .roadmap-card:hover .card-hover-overlay {
+    transform: translateY(0);
+  }
+
+  .view-roadmap {
+    color: white;
+    font-weight: 700;
+    font-family: 'Courier New', monospace;
+    font-size: var(--text-base);
+  }
+
+  /* No Results */
+  .no-results {
+    max-width: 600px;
+    margin: var(--spacing-20) auto;
+  }
+
+  .terminal-window {
+    background: rgba(10, 14, 26, 0.9);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    overflow: hidden;
+  }
+
+  .terminal-header {
+    background: rgba(20, 24, 41, 0.9);
+    padding: var(--spacing-3) var(--spacing-4);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+  }
+
+  .terminal-buttons {
+    display: flex;
+    gap: var(--spacing-2);
+  }
+
+  .terminal-buttons span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: block;
+  }
+
+  .btn-close { background: #ff5f57; }
+  .btn-minimize { background: #ffbd2e; }
+  .btn-maximize { background: #28c840; }
+
+  .terminal-title {
+    font-family: 'Courier New', monospace;
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    flex: 1;
+    text-align: center;
+  }
+
+  .terminal-body {
+    padding: var(--spacing-6);
+  }
+
+  .error-text {
+    font-family: 'Courier New', monospace;
+    font-size: var(--text-sm);
+    line-height: 1.8;
+    color: var(--color-text-muted);
+  }
+
+  .error-text .command {
+    color: var(--color-accent-cyan);
+  }
+
+  .error-text .error {
+    color: #ff5f57;
+    display: block;
+    margin: var(--spacing-4) 0;
+  }
+
+  .error-text .suggestion {
+    color: var(--color-accent-green);
+    display: block;
+    margin: var(--spacing-4) 0 var(--spacing-2);
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .roadmaps-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
   @media (max-width: 768px) {
-    .hero-simple h1 { font-size: var(--text-3xl); }
-    .hero-description { font-size: var(--text-lg); }
-    .roadmaps-grid { grid-template-columns: 1fr; }
+    .page-title {
+      font-size: var(--text-4xl);
+    }
+
+    .roadmaps-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .filter-section {
+      align-items: flex-start;
+    }
+
+    .filter-chips {
+      justify-content: flex-start;
+    }
+
+    .search-shortcut {
+      display: none;
+    }
+  }
+
+  /* Locked State */
+  .roadmap-card.locked {
+    cursor: not-allowed;
+    opacity: 0.6;
+    position: relative;
+  }
+
+  .roadmap-card.locked:hover {
+    transform: none;
+    border-color: var(--glass-border);
+    box-shadow: var(--glass-shadow);
+  }
+
+  .lock-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    background: rgba(6, 182, 212, 0.1);
+    backdrop-filter: blur(4px);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--color-primary-500);
+  }
+
+  .lock-icon {
+    font-size: 2rem;
+    filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.5));
+  }
+
+  .badge-coming-soon {
+    padding: var(--spacing-1) var(--spacing-3);
+    background: var(--gradient-teal);
+    border-radius: var(--radius-md);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
   }
 </style>
